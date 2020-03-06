@@ -1,0 +1,43 @@
+.authWrapper {
+  width: 100vw;
+  height: 100vh;
+  background: #0f2027;
+  background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  overflow: hidden;
+}
+.authFormContainer {
+  width: 300px;
+  margin: 200px auto;
+  background-color: bisque;
+}
+.authFormContainer img {
+  width: 300px;
+  height: 150px;
+}
+
+.authFormContainer form {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.authFormContainer button[type="submit"] {
+  width: 200px;
+  height: 40px;
+  margin: 10px auto;
+  background: #0f2027;
+  background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  color: white;
+  border-style: hidden;
+}
+.authFormContainer a {
+  text-decoration: none;
+  color: black;
+  font-weight: 800;
+  text-align: end;
+}
+.authFormContainer a:hover {
+  color: #2c5364;
+}
