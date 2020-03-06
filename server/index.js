@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 dotenv.config();
 
 //Import Routes
+const authRoute = require('./routes/auth');
 
 //Connect to DB
 mongoose.connect(
@@ -17,5 +18,6 @@ mongoose.connect(
 app.use(express.json());
 
 //Route Middlewares
+app.use("/api/user", authRoute);
 
 app.listen(process.env.PORT || 3001, () => console.log("Express running"));
