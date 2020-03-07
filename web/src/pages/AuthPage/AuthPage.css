@@ -9,7 +9,12 @@
 .authFormContainer {
   width: 300px;
   margin: 200px auto;
-  background-color: bisque;
+  background-image: linear-gradient(
+    to right,
+    #16222a 0%,
+    #3a6073 51%,
+    #16222a 100%
+  );
 }
 .authFormContainer img {
   width: 300px;
@@ -26,11 +31,10 @@
   width: 200px;
   height: 40px;
   margin: 10px auto;
-  background: #0f2027;
-  background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
-  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  background: transparent;
   color: white;
   border-style: hidden;
+  cursor: pointer;
 }
 .authFormContainer a {
   text-decoration: none;
