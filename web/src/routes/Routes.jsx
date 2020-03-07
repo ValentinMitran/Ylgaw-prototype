@@ -6,6 +6,7 @@ import AppPage from "./../pages/AppPage/AppPage";
 import Error404 from "./../pages/ErrorPage/Error404";
 import LoginPage from "./../pages/AuthPage/LoginPage";
 import RegisterPage from "./../pages/AuthPage/RegisterPage";
+import Logout from "./../utils/Logout";
 
 function Routes() {
   return (
@@ -20,6 +21,9 @@ function Routes() {
           </Route>
           <Route path="/register">
             <RegisterPage />
+          </Route>
+          <Route path="/logout">
+            <Logout />
           </Route>
           <Route path="/*">
             <Error404 />
