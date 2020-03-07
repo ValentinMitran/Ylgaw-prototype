@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import "./AuthPage.css";
 
-function RegisterPage({history}) {
+function RegisterPage({ history }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const [registerError, setRegisterError] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +17,7 @@ function RegisterPage({history}) {
 
   const submitForm = async e => {
     e.preventDefault();
-    
+
     let response = await fetch("/api/user/register", {
       method: "Post",
       headers: {
@@ -29,14 +31,14 @@ function RegisterPage({history}) {
       alert(err);
     });
     response = await response.text();
-    if (response === 'Success') {
-      alert('Registration Successful');
-      history.push('/login');
+    if (response === "Success") {
+      alert("Registration Successful");
+      history.push("/login");
     } else {
+      setRegisterError(response);
       setUsername("");
       setPassword("");
     }
-
   };
 
   if (isLoading) {
@@ -56,6 +58,7 @@ function RegisterPage({history}) {
             src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
             alt="Ylgaw Logo"
           />
+          {registerError ? registerError : null}
           <form onSubmit={submitForm}>
             Username:
             <input
