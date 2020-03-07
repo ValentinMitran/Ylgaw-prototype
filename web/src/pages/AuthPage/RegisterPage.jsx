@@ -72,7 +72,7 @@ function RegisterPage({ history }) {
             />
             Password:
             <input
-              type="text"
+              type="password"
               name="password"
               id="password"
               value={password}
