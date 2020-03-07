@@ -12,9 +12,31 @@ router.get("/isLoggedIn", verifyToken, (req, res) => {
   res.send(true);
 });
 
-router.post("/register", (req, res) => {
-  res.send(true);
-});
+router.post("/register", async (req, res) => {
+    const { error } = registerValidation(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+  
+    //Check if email exists
+    const usernameExists = await User.findOne({ username: req.body.username });
+    if (usernameExists) return res.status(400).send("USERNAME ALREADY IN USE");
+  
+    //Hash passwords
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+  
+    //Create a new user
+    const user = new User({
+      username: req.body.username,
+      password: hashedPassword
+    });
+  
+    try {
+      const savedUser = await user.save();
+      res.send("Success");
+    } catch (err) {
+      res.status(400).send(err);
+    }
+  });
 
 router.post("/login", async (req, res) => {
 
