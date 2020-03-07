@@ -6,6 +6,8 @@ function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [loginError,setLoginError] = useState(false);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,6 +34,7 @@ function LoginPage() {
       localStorage.authToken = response.headers.get("authToken");
       setIsLoggedIn(true);
     } else {
+      setLoginError("Username/Password combination doesn't exist.");
       setUsername("");
       setPassword("");
     }
@@ -56,6 +59,7 @@ function LoginPage() {
             src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
             alt="Ylgaw Logo"
           />
+          {loginError? loginError : null}
           <form onSubmit={submitForm}>
             Username:
             <input
