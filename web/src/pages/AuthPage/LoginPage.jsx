@@ -15,8 +15,27 @@ function LoginPage() {
 
   const submitForm = async e => {
     e.preventDefault();
-    console.log(username);
-    console.log(password);
+
+    let response = await fetch("/api/user/login", {
+      method: "Post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    }).catch(err => {
+      alert(err);
+    });
+    if (response.headers.get("authToken")) {
+      localStorage.authToken = response.headers.get("authToken");
+      setIsLoggedIn(true);
+    } else {
+      setUsername("");
+      setPassword("");
+    }
+
   };
 
   if (isLoading) {
@@ -30,6 +49,7 @@ function LoginPage() {
 
   return (
     <>
+      {isLoggedIn ? <Redirect to="/" /> : null}
       <div className="authWrapper">
         <div className="authFormContainer">
           <img
