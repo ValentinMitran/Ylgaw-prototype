@@ -58,7 +58,9 @@ function RegisterPage({ history }) {
             src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
             alt="Ylgaw Logo"
           />
-          {registerError ? registerError : null}
+          <div className={registerError ? "authErrorHandler" : null}>
+            {registerError ? registerError : null}
+          </div>
           <form onSubmit={submitForm}>
             Username:
             <input

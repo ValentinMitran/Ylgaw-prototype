@@ -59,7 +59,9 @@ function LoginPage() {
             src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
             alt="Ylgaw Logo"
           />
-          {loginError? loginError : null}
+           <div className={loginError ? "authErrorHandler" : null}>
+           {loginError? loginError : null}
+          </div>
           <form onSubmit={submitForm}>
             Username:
             <input
