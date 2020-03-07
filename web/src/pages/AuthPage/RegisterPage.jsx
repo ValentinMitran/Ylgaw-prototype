@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
 import "./AuthPage.css";
 
-function RegisterPage() {
+function RegisterPage({history}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,8 +15,28 @@ function RegisterPage() {
 
   const submitForm = async e => {
     e.preventDefault();
-    console.log(username);
-    console.log(password);
+    
+    let response = await fetch("/api/user/register", {
+      method: "Post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    }).catch(err => {
+      alert(err);
+    });
+    response = await response.text();
+    if (response === 'Success') {
+      alert('Registration Successful');
+      history.push('/login');
+    } else {
+      setUsername("");
+      setPassword("");
+    }
+
   };
 
   if (isLoading) {
@@ -62,4 +82,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default withRouter(RegisterPage);
