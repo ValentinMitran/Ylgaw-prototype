@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Error404 from "./../ErrorPage/Error404";
+import './AppPage.css';
 
 function AppPage() {
   return (
