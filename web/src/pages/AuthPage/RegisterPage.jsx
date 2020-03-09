@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
-import "./AuthPage.css";
+import "./AuthPage.scss";
 
 function RegisterPage({ history }) {
   const [username, setUsername] = useState("");

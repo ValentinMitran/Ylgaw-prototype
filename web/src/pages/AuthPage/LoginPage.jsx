@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
-import "./AuthPage.css";
+import "./AuthPage.scss";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
