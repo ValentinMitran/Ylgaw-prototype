@@ -1,0 +1,22 @@
+.coreNav {
+  height: 50px;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+}
+.coreNav a {
+  height: 50px;
+  width: 20vw;
+  background-color: rgb(155, 155, 155);
+  font-size: 30px;
+  text-decoration: none;
+}
+.coreNav a svg {
+  color: black;
+  font-size: 50px;
+  margin: auto;
+  width: 50px;
+  display: block;
+}
