@@ -18,15 +18,17 @@ function TopNav() {
         <button onClick={() => setIsSideOpen(true)}>
           <MdMenu />
         </button>
-        <Link to="/apps">
-          <MdSearch />
-        </Link>
-        <Link to="/notifications">
-          <MdRefresh />
-        </Link>
-        <Link to="/profile">
-          <MdMoreVert />
-        </Link>
+        <div className="rightSideTopBar">
+          <Link to="/apps">
+            <MdSearch />
+          </Link>
+          <Link to="/notifications">
+            <MdRefresh />
+          </Link>
+          <Link to="/profile">
+            <MdMoreVert />
+          </Link>
+        </div>
       </div>
       <nav
         className="sideNav"
