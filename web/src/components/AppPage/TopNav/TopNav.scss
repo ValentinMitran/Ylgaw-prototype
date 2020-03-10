@@ -25,11 +25,21 @@
 }
 
 .sideNav {
-  height: 100vh;
-  width: 80vw;
+  height: 100%;
+  width: 300px;
   top: 0;
   left: 0;
   background-color: lawngreen;
   position: absolute;
   z-index: 2;
+}
+.blur {
+  height: 100%;
+  width: calc(100% - 300px);
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(3px);
 }

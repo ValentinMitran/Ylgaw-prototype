@@ -38,6 +38,11 @@ function TopNav() {
           <MdClose />
         </button>
       </nav>
+      <div
+        className="blur"
+        style={isSideOpen ? { display: "block" } : { display: "none" }}
+        onClick={() => setIsSideOpen(false)}
+      ></div>
     </>
   );
 }
