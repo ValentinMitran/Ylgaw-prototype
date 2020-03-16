@@ -1,9 +1,10 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, Link } from "react-router-dom";
 import CoreNav from "../../components/AppPage/CoreNav/CoreNav";
 import TopNav from "../../components/AppPage/TopNav/TopNav";
 import Error404 from "./../ErrorPage/Error404";
 import "./AppPage.scss";
+import { MdAccountBalance } from "react-icons/md";
 
 function AppPage() {
   return (
@@ -25,7 +26,51 @@ function AppPage() {
           <CoreNav />
         </Route>
         <Route path="/apps">
-          <div className="main">MORE APPS</div>
+            <div className="moreApps">
+
+              <Link to="">
+                <div className="appBox">
+                  <MdAccountBalance />
+                  <span>M1</span>
+                </div>
+              </Link>
+
+              <Link to="">
+                <div className="appBox">
+                  <MdAccountBalance />
+                  <span>M2</span>
+                </div>
+              </Link>
+
+              <Link to="">
+                <div className="appBox">
+                  <MdAccountBalance />
+                  <span>M3</span>
+                </div>
+              </Link>
+
+              <Link to="">
+                <div className="appBox">
+                  <MdAccountBalance />
+                  <span>M4</span>
+                </div>
+              </Link>
+
+              <Link to="">
+                <div className="appBox">
+                  <MdAccountBalance />
+                  <span>M5</span>
+                </div>
+              </Link>
+
+              <Link to="">
+                <div className="appBox">
+                  <MdAccountBalance />
+                  <span>M6</span>
+                </div>
+              </Link>
+
+          </div>
           <CoreNav />
         </Route>
         <Route path="/notifications">
