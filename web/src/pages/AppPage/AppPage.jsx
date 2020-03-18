@@ -5,6 +5,7 @@ import TopNav from "../../components/AppPage/TopNav/TopNav";
 import MoreApps from './MoreApps/MoreApps';
 import ToDo from './../../modules/ToDo/ToDo';
 import Error404 from "./../ErrorPage/Error404";
+import TimeMachine from './../../modules/TimeMachine/TimeMachine';
 import "./AppPage.scss";
 
 function AppPage() {
@@ -38,8 +39,12 @@ function AppPage() {
           <div className="main">PROFILE</div>
           <CoreNav />
         </Route>
-        <Route path="/m1">
+        <Route path="/todo">
             <ToDo/>
+          <CoreNav />
+        </Route>
+        <Route path="/timemachine">
+          <TimeMachine />
           <CoreNav />
         </Route>
         <Route path="*">

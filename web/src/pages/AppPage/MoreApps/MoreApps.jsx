@@ -7,17 +7,17 @@ function MoreApps() {
   return (
     <>
       <div className="moreApps">
-        <Link to="/m1">
+        <Link to="/todo">
           <div className="appBox">
             <MdAccountBalance />
-            <span>M1</span>
+            <span>Todo</span>
           </div>
         </Link>
 
-        <Link to="">
+        <Link to="/timemachine">
           <div className="appBox">
             <MdAccountBalance />
-            <span>M2</span>
+            <span>Time Machine</span>
           </div>
         </Link>
 
