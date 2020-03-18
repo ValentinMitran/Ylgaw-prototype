@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import CoreNav from "../../components/AppPage/CoreNav/CoreNav";
 import TopNav from "../../components/AppPage/TopNav/TopNav";
 import MoreApps from './MoreApps/MoreApps';
+import ToDo from './../../modules/ToDo/ToDo';
 import Error404 from "./../ErrorPage/Error404";
 import "./AppPage.scss";
 
@@ -38,7 +39,7 @@ function AppPage() {
           <CoreNav />
         </Route>
         <Route path="/m1">
-          <div className="main">M1</div>
+            <ToDo/>
           <CoreNav />
         </Route>
         <Route path="*">
