@@ -10,7 +10,8 @@
 
 # production
 /build
-
+# Google
+Ylgaw-3eacc336035c.json
 # misc
 .DS_Store
 .env

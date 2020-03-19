@@ -26,7 +26,7 @@ function TimeMachine() {
     getPicture(previousDay);
   }
   async function getPicture(date) {
-    let response = await fetch("/api/timeMachine", {
+    let response = await fetch("/api/timeMachine/get", {
       method: "Post",
       headers: {
         "Content-Type": "application/json",
