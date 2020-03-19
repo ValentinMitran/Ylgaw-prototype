@@ -9,11 +9,9 @@ const singleUpload = upload.single("daily");
 router.post("/upload", verifyToken, function(req, res) {
   singleUpload(req, res, function(err) {
     if (err) {
-      return res
-        .status(422)
-        .send({
-          errors: [{ title: "File Upload Error", detail: err.message }]
-        });
+      return res.status(422).send({
+        errors: [{ title: "File Upload Error", detail: err.message }]
+      });
     }
 
     return res.json({ imageUrl: req.file.location });
@@ -21,10 +19,8 @@ router.post("/upload", verifyToken, function(req, res) {
 });
 
 router.post("/get", verifyToken, (req, res) => {
-  if (req.body.date == 21) {
-    res.send(true);
-  } else {
-    res.send(false);
-  }
+  res.send(
+    `https://ylgaw.s3.eu-west-3.amazonaws.com/mrx/${req.body.date}${req.body.month}${req.body.year}.png`
+  );
 });
 module.exports = router;

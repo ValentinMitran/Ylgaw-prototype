@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Uploader from "./Uploader";
+import Remover from "./Remover";
 
 import "./TimeMachine.scss";
 
 function TimeMachine() {
-  const [file, setFile] = useState(false);
   const [date, setDate] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [src, setSrc] = useState("");
 
   function initiateDate() {
     let date = new Date();
     setDate(date);
+    getPicture(date);
   }
 
   function nextDay() {
@@ -26,6 +28,7 @@ function TimeMachine() {
     getPicture(previousDay);
   }
   async function getPicture(date) {
+    setIsLoading(true);
     let response = await fetch("/api/timeMachine/get", {
       method: "Post",
       headers: {
@@ -33,34 +36,48 @@ function TimeMachine() {
         "auth-token": localStorage.authToken
       },
       body: JSON.stringify({
-        date: date.getDate()
+        date: date.getDate(),
+        month: date.getMonth(),
+        year: date.getFullYear()
       })
     }).catch(err => {
       alert(err);
     });
     response = await response.text();
-    response == "true" ? setFile(true) : setFile(false);
+    response == "false" ? setSrc(false) : setSrc(response);
+    setIsLoading(false);
   }
+
   useEffect(() => {
     initiateDate();
-    setIsLoading(false);
   }, []);
 
   if (isLoading) {
-    return <>Loading...</>;
+    return (
+      <>
+        <div className="timeMachine">
+          <h4>Time Machine</h4>
+          Loading...
+        </div>
+      </>
+    );
   }
 
   return (
     <>
       <div className="timeMachine">
-        Time Machine
-        {!file ? (
+        <h4>Time Machine</h4>
+        {!src ? null : <img src={src} alt="" />}
+
+        {!src ? (
           <Uploader
             date={date.getDate()}
             month={date.getMonth()}
             year={date.getFullYear()}
           />
-        ) : null}
+        ) : (
+          <Remover />
+        )}
         <div className="dateController">
           <button
             onClick={() => {
