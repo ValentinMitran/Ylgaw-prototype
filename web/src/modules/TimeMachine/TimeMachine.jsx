@@ -54,7 +54,13 @@ function TimeMachine() {
     <>
       <div className="timeMachine">
         Time Machine
-        {!file ? <Uploader /> : null}
+        {!file ? (
+          <Uploader
+            date={date.getDate()}
+            month={date.getMonth()}
+            year={date.getFullYear()}
+          />
+        ) : null}
         <div className="dateController">
           <button
             onClick={() => {

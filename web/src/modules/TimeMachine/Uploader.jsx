@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-function Uploader() {
+function Uploader(props) {
   const handleImageUpload = async event => {
     const files = event.target.files;
     const formData = new FormData();
     formData.append("username", "mrx");
+    formData.append("date", props.date);
+    formData.append("month", props.month);
+    formData.append("year", props.year);
 
     formData.append("daily", files[0]);
     let response = await fetch("/api/timeMachine/upload", {
@@ -20,7 +23,7 @@ function Uploader() {
     alert(response);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {}, [props.date]);
 
   return (
     <form>
