@@ -12,17 +12,35 @@ function TimeMachine() {
     let date = new Date();
     setDate(date);
   }
+
   function nextDay() {
     let nextDay = new Date(date);
     nextDay.setDate(nextDay.getDate() + 1);
     setDate(nextDay);
+    getPicture(nextDay);
   }
   function previousDay() {
     let previousDay = new Date(date);
     previousDay.setDate(previousDay.getDate() - 1);
     setDate(previousDay);
+    getPicture(previousDay);
   }
-
+  async function getPicture(date) {
+    let response = await fetch("/api/timeMachine", {
+      method: "Post",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.authToken
+      },
+      body: JSON.stringify({
+        date: date.getDate()
+      })
+    }).catch(err => {
+      alert(err);
+    });
+    response = await response.text();
+    response == "true" ? setFile(true) : setFile(false);
+  }
   useEffect(() => {
     initiateDate();
     setIsLoading(false);
