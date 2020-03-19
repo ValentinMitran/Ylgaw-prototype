@@ -17,15 +17,16 @@
 
 ## Key Features
 
-* To be written
+* Time Machine (Diary)(In progress...)
 * To be written
 * To be written
 
 ## TO DO
 
-* To be written
-* To be written
-* To be written
+* Wallet System
+* Ad Posting System
+* Chat
+* More...
 
 ## License
 
