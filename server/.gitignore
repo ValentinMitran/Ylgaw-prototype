@@ -7,7 +7,8 @@
 
 # testing
 /coverage
-
+# uploads
+timemachine
 # production
 /build
 # Google
