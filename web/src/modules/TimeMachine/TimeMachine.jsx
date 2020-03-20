@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Uploader from "./Uploader";
-import Remover from "./Remover";
+import Remover from "./Remover/Remover";
 
 import "./TimeMachine.scss";
 
@@ -76,7 +76,9 @@ function TimeMachine() {
             year={date.getFullYear()}
           />
         ) : (
-          <Remover />
+          <Remover date={date.getDate()}
+          month={date.getMonth() + 1}
+          year={date.getFullYear()} />
         )}
         <div className="dateController">
           <button

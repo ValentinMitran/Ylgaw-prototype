@@ -35,13 +35,15 @@ router.post("/get", verifyToken, (req, res) => {
 });
 
 router.post("/remove", verifyToken, (req, res) => {
-  const s3 = new aws.S3();
-
   const decoded = jwt.decode(req.header("auth-token"));
+
+  const s3 = new aws.S3();
+  const date = req.body.date.toString()+req.body.month.toString()+req.body.year.toString();
+  const image = `${decoded.username}/${date}.png`
 
   var params = {
     Bucket: "ylgaw",
-    Key: `${decoded.username}/${req.body.date}.png`
+    Key: image
   };
   s3.deleteObject(params, function(err, data) {
     if (err) {
