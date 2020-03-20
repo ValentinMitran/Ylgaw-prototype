@@ -37,7 +37,7 @@ function TimeMachine() {
       },
       body: JSON.stringify({
         date: date.getDate(),
-        month: date.getMonth(),
+        month: date.getMonth() + 1,
         year: date.getFullYear()
       })
     }).catch(err => {
@@ -72,7 +72,7 @@ function TimeMachine() {
         {!src ? (
           <Uploader
             date={date.getDate()}
-            month={date.getMonth()}
+            month={date.getMonth() + 1}
             year={date.getFullYear()}
           />
         ) : (
@@ -87,7 +87,7 @@ function TimeMachine() {
             &lt;
           </button>
           <span>
-            {date.getDate()}/{date.getMonth()}/{date.getFullYear()}{" "}
+            {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}{" "}
           </span>
           <button
             onClick={() => {
