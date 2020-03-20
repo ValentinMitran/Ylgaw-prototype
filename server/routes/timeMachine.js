@@ -1,10 +1,20 @@
 const router = require("express").Router();
-const jwt = require("jsonwebtoken");
-const multer = require("multer");
 const verifyToken = require("../utils/verifyToken");
-const fs = require("fs");
+const jwt = require("jsonwebtoken");
+
 const upload = require("./../utils/file-upload");
 const singleUpload = upload.single("daily");
+
+const aws = require("aws-sdk");
+
+const dotenv = require("dotenv");
+dotenv.config();
+
+aws.config.update({
+  secretAccessKey: process.env.AWS_SECRET_ACCESS,
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  region: process.env.AWS_REGION
+});
 
 router.post("/upload", verifyToken, function(req, res) {
   singleUpload(req, res, function(err) {
@@ -23,4 +33,23 @@ router.post("/get", verifyToken, (req, res) => {
     `https://ylgaw.s3.eu-west-3.amazonaws.com/mrx/${req.body.date}${req.body.month}${req.body.year}.png`
   );
 });
+
+router.post("/remove", verifyToken, (req, res) => {
+  const s3 = new aws.S3();
+
+  const decoded = jwt.decode(req.header("auth-token"));
+
+  var params = {
+    Bucket: "ylgaw",
+    Key: `${decoded.username}/${req.body.date}.png`
+  };
+  s3.deleteObject(params, function(err, data) {
+    if (err) {
+      console.log(err, err.stack);
+    } else {
+      res.send("Success");
+    }
+  });
+});
+
 module.exports = router;
