@@ -67,7 +67,7 @@ function TimeMachine() {
     <>
       <div className="timeMachine">
         <h4>Time Machine</h4>
-        {!src ? null : <img src={`data:image/png;base64,${src}`} alt="" />}
+        {!src ? <div className="placer"><h4>EMPTY</h4></div> : <img src={`data:image/png;base64,${src}`} alt="" />}
 
         {!src ? (
           <Uploader
