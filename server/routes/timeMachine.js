@@ -29,17 +29,41 @@ router.post("/upload", verifyToken, function(req, res) {
 });
 
 router.post("/get", verifyToken, (req, res) => {
-  res.send(
-    `https://ylgaw.s3.eu-west-3.amazonaws.com/mrx/${req.body.date}${req.body.month}${req.body.year}.png`
-  );
+  const decoded = jwt.decode(req.header("auth-token"));
+
+  const s3 = new aws.S3();
+  const date =
+    req.body.date.toString() +
+    req.body.month.toString() +
+    req.body.year.toString();
+  const image = `${decoded.username}/${date}.png`;
+
+  var params = {
+    Bucket: "ylgaw",
+    Key: image
+  };
+  s3.getObject(params, function(error, data) {
+    if (error != null) {
+      console.log("Failed to retrieve an object: " + error);
+      res.send("false");
+    } else {
+      const img64 = Buffer.from(data.Body).toString("base64");
+      res.send(img64);
+
+      console.log("Loaded " + data.ContentLength + " bytes");
+    }
+  });
 });
 
 router.post("/remove", verifyToken, (req, res) => {
   const decoded = jwt.decode(req.header("auth-token"));
 
   const s3 = new aws.S3();
-  const date = req.body.date.toString()+req.body.month.toString()+req.body.year.toString();
-  const image = `${decoded.username}/${date}.png`
+  const date =
+    req.body.date.toString() +
+    req.body.month.toString() +
+    req.body.year.toString();
+  const image = `${decoded.username}/${date}.png`;
 
   var params = {
     Bucket: "ylgaw",
