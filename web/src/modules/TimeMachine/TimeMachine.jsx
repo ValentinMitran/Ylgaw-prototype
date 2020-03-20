@@ -3,11 +3,13 @@ import Uploader from "./Uploader/Uploader";
 import Remover from "./Remover/Remover";
 
 import "./TimeMachine.scss";
+import ActionContext from "./ActionContext";
 
 function TimeMachine() {
   const [date, setDate] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [src, setSrc] = useState("");
+  const [action, setAction] = useState(false);
 
   function initiateDate() {
     let date = new Date();
@@ -50,7 +52,7 @@ function TimeMachine() {
 
   useEffect(() => {
     initiateDate();
-  }, []);
+  }, [action]);
 
   if (isLoading) {
     return (
@@ -67,19 +69,28 @@ function TimeMachine() {
     <>
       <div className="timeMachine">
         <h4>Time Machine</h4>
-        {!src ? <div className="placer"><h4>EMPTY</h4></div> : <img src={`data:image/png;base64,${src}`} alt="" />}
-
         {!src ? (
-          <Uploader
-            date={date.getDate()}
-            month={date.getMonth() + 1}
-            year={date.getFullYear()}
-          />
+          <div className="placer">
+            <h4>EMPTY</h4>
+          </div>
         ) : (
-          <Remover date={date.getDate()}
-          month={date.getMonth() + 1}
-          year={date.getFullYear()} />
+          <img src={`data:image/png;base64,${src}`} alt="" />
         )}
+        <ActionContext.Provider value={[action, setAction]}>
+          {!src ? (
+            <Uploader
+              date={date.getDate()}
+              month={date.getMonth() + 1}
+              year={date.getFullYear()}
+            />
+          ) : (
+            <Remover
+              date={date.getDate()}
+              month={date.getMonth() + 1}
+              year={date.getFullYear()}
+            />
+          )}
+        </ActionContext.Provider>
         <div className="dateController">
           <button
             onClick={() => {
