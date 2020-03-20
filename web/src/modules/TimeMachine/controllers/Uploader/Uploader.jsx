@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import ActionContext from "../ActionContext";
+import ActionContext from "../../ActionContext";
 
 function Uploader(props) {
   const [action, setAction] = useContext(ActionContext);

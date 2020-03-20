@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Uploader from "./Uploader/Uploader";
-import Remover from "./Remover/Remover";
+import Uploader from "./controllers/Uploader/Uploader";
+import Remover from "./controllers/Remover/Remover";
 
 import "./TimeMachine.scss";
 import ActionContext from "./ActionContext";
