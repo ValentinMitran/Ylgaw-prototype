@@ -1,12 +1,10 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Remover.scss";
 
-import ActionContext from '../ActionContext';
+import ActionContext from "../ActionContext";
 
 function Remover(props) {
-
-const [action,setAction] = useContext(ActionContext);
-
+  const [action, setAction] = useContext(ActionContext);
 
   async function removeImg() {
     let response = await fetch("/api/timeMachine/remove", {

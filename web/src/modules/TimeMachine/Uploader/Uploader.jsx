@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import ActionContext from "../ActionContext";
 
 function Uploader(props) {
+  const [action, setAction] = useContext(ActionContext);
+
   const handleImageUpload = async event => {
     const files = event.target.files;
     const formData = new FormData();
@@ -21,6 +24,7 @@ function Uploader(props) {
     });
     response = await response.text();
     alert(response);
+    setAction(!action);
   };
 
   useEffect(() => {}, [props.date]);
