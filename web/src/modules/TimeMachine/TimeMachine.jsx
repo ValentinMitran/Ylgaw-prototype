@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Uploader from "./Uploader";
+import Uploader from "./Uploader/Uploader";
 import Remover from "./Remover/Remover";
 
 import "./TimeMachine.scss";
