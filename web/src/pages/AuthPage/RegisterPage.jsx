@@ -52,15 +52,14 @@ function RegisterPage({ history }) {
 
   return (
     <>
-      <div className="authWrapper">
-        <div className="authFormContainer">
+      {isLoggedIn ? <Redirect to="/" /> : null}
+      <div className="auth-wrapper">
+        <div className="auth-form">
           <img
+            alt=""
             src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
-            alt="Ylgaw Logo"
           />
-          <div className={registerError ? "authErrorHandler" : null}>
-            {registerError ? registerError : null}
-          </div>
+          <div>{registerError}</div>
           <form onSubmit={submitForm}>
             Username:
             <input
@@ -79,8 +78,8 @@ function RegisterPage({ history }) {
               onChange={e => setPassword(e.target.value)}
             />
             <button type="submit">Register</button>
-            <Link to="/login">Login</Link>
           </form>
+          <a href="/login">LOGIN</a>
         </div>
       </div>
     </>

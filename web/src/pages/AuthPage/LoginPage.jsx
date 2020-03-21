@@ -53,17 +53,16 @@ function LoginPage() {
   return (
     <>
       {isLoggedIn ? <Redirect to="/" /> : null}
-      <div className="authWrapper">
-        <div className="authFormContainer">
+
+      <div className="auth-wrapper">
+        <div className="auth-form">
           <img
+            alt=""
             src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
-            alt="Ylgaw Logo"
           />
-           <div className={loginError ? "authErrorHandler" : null}>
-           {loginError? loginError : null}
-          </div>
+          <div>{loginError}</div>
           <form onSubmit={submitForm}>
-            Username:
+          Username:
             <input
               type="text"
               name="username"
@@ -73,6 +72,7 @@ function LoginPage() {
             />
             Password:
             <input
+              required
               type="password"
               name="password"
               id="password"
@@ -80,10 +80,14 @@ function LoginPage() {
               onChange={e => setPassword(e.target.value)}
             />
             <button type="submit">Login</button>
-            <Link to="/register">Register</Link>
+            <a href="/register">REGISTER</a>
           </form>
         </div>
       </div>
+
+
+
+
     </>
   );
 }

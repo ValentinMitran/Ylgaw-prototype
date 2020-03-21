@@ -51,3 +51,59 @@
   background-color: red;
   transition: background-color 2s ease-in-out;
 }
+
+
+//cybercore
+
+.auth-wrapper {
+  height: 100vh;
+  width: 100vw;
+  background: #0f2027;
+  background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  overflow: hidden;
+}
+
+.auth-form {
+  width: 320px;
+  height: 405px;
+  padding: 50px 40px 40px;
+  background: white;
+  margin: auto;
+  margin-top: 150px;
+  display: block;
+  border-radius: 7px;
+}
+.auth-form img {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  display: block;
+  padding-bottom: 20px;
+}
+
+.auth-form input {
+  width: 100%;
+  height: 20px;
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 6px;
+}
+.auth-form button[type="submit"] {
+  width: 100%;
+  height: 40px;
+  margin-top: 20px;
+  background: #0f2027;
+  background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);  display: block;
+  border-style: hidden;
+  color: white;
+}
+.auth-form a{
+  text-decoration: none;
+  color: black;
+  font-weight: 800;
+}
+.auth-form a:hover{
+  color: #00577c;
+}
