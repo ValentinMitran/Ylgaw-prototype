@@ -79,7 +79,7 @@ function RegisterPage({ history }) {
             />
             <button type="submit">Register</button>
           </form>
-          <a href="/login">LOGIN</a>
+          <Link to="/login">LOGIN</Link>
         </div>
       </div>
     </>

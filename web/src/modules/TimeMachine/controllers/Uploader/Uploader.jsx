@@ -7,7 +7,7 @@ function Uploader(props) {
   const handleImageUpload = async event => {
     const files = event.target.files;
     const formData = new FormData();
-    formData.append("username", "mrx");
+    formData.append("username", props.username);
     formData.append("date", props.date);
     formData.append("month", props.month);
     formData.append("year", props.year);

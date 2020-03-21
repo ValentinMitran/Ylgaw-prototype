@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Uploader from "./controllers/Uploader/Uploader";
 import Remover from "./controllers/Remover/Remover";
-
 import "./TimeMachine.scss";
 import ActionContext from "./ActionContext";
+const jwt = require("jsonwebtoken");
 
 function TimeMachine() {
   const [date, setDate] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [src, setSrc] = useState("");
   const [action, setAction] = useState(false);
-
+  const [username, setUsername] = useState("");
   function initiateDate() {
     let date = new Date();
     setDate(date);
@@ -31,6 +31,8 @@ function TimeMachine() {
   }
   async function getPicture(date) {
     setIsLoading(true);
+    const decodedjwt = jwt.decode(localStorage.authToken);
+    setUsername(decodedjwt.username);
     let response = await fetch("/api/timeMachine/get", {
       method: "Post",
       headers: {
@@ -67,48 +69,51 @@ function TimeMachine() {
 
   return (
     <>
-      <div className="timeMachine">
-        <h4>Time Machine</h4>
-        {!src ? (
-          <div className="placer">
-            <h4>EMPTY</h4>
-          </div>
-        ) : (
-          <img src={`data:image/png;base64,${src}`} alt="" />
-        )}
-        <ActionContext.Provider value={[action, setAction]}>
+      <div className="main">
+        <div className="timeMachine">
+          <h4>Time Machine</h4>
           {!src ? (
-            <Uploader
-              date={date.getDate()}
-              month={date.getMonth() + 1}
-              year={date.getFullYear()}
-            />
+            <div className="placer">
+              <h4>EMPTY</h4>
+            </div>
           ) : (
-            <Remover
-              date={date.getDate()}
-              month={date.getMonth() + 1}
-              year={date.getFullYear()}
-            />
+            <img src={`data:image/png;base64,${src}`} alt="" />
           )}
-        </ActionContext.Provider>
-        <div className="dateController">
-          <button
-            onClick={() => {
-              previousDay();
-            }}
-          >
-            &lt;
-          </button>
-          <span>
-            {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}{" "}
-          </span>
-          <button
-            onClick={() => {
-              nextDay();
-            }}
-          >
-            &gt;
-          </button>
+          <ActionContext.Provider value={[action, setAction]}>
+            {!src ? (
+              <Uploader
+                date={date.getDate()}
+                month={date.getMonth() + 1}
+                year={date.getFullYear()}
+                username={username}
+              />
+            ) : (
+              <Remover
+                date={date.getDate()}
+                month={date.getMonth() + 1}
+                year={date.getFullYear()}
+              />
+            )}
+          </ActionContext.Provider>
+          <div className="dateController">
+            <button
+              onClick={() => {
+                previousDay();
+              }}
+            >
+              &lt;
+            </button>
+            <span>
+              {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}{" "}
+            </span>
+            <button
+              onClick={() => {
+                nextDay();
+              }}
+            >
+              &gt;
+            </button>
+          </div>
         </div>
       </div>
     </>

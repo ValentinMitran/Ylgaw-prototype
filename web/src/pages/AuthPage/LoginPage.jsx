@@ -80,7 +80,7 @@ function LoginPage() {
               onChange={e => setPassword(e.target.value)}
             />
             <button type="submit">Login</button>
-            <a href="/register">REGISTER</a>
+            <Link to="/register">REGISTER</Link>
           </form>
         </div>
       </div>
