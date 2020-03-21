@@ -1,0 +1,47 @@
+
+/* SIDEBAR */
+.sidebar {
+    width: 72px;
+    height: calc(100vh - 56px);
+    background-color: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    overflow: hidden;
+  }
+  .sidebar nav{
+      display: flex;
+      flex-direction: column;
+      background-color: #FFFFFF; 
+  }
+  .sidebar nav a{
+      text-decoration: none;
+      color: black;
+      text-align: center;
+      height: 50px;
+      line-height: 50px;
+      outline: 0;
+      text-align: center;
+  }
+  .sidebar nav svg{
+      vertical-align: middle;
+      font-size: 35px;
+  }
+  .sidebar nav span{
+      font-size: 14px;
+      color: #000000;
+  }
+  /* Change icon to text*/
+  .sidebar nav a span,
+  .sidebar nav a:hover svg {
+    display: none;
+  }
+  .sidebar nav a:hover span {
+    display: block;
+    background: rgb(247, 247, 247);
+  }
+  
+  #logout{
+    position: fixed;
+    width: 72px;
+    bottom: 0;
+  }
