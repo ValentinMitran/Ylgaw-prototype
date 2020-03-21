@@ -46,7 +46,7 @@ function TimeMachine() {
       alert(err);
     });
     response = await response.text();
-    response == "false" ? setSrc(false) : setSrc(response);
+    response === "false" ? setSrc(false) : setSrc(response);
     setIsLoading(false);
   }
 

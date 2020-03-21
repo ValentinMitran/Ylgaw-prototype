@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  MdMoreVert,
-  MdClose,
-  MdRefresh,
-  MdSearch,
-  MdMenu,
-  MdKeyboardReturn
-} from "react-icons/md";
+import { MdMoreVert, MdSearch, MdMenu, MdKeyboardReturn } from "react-icons/md";
 import "./TopNav.scss";
 
 function TopNav() {

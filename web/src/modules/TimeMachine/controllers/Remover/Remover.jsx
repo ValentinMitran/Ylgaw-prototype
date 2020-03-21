@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import "./Remover.scss";
 
 import ActionContext from "../../ActionContext";
