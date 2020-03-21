@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import TopNav from "../../components/AppPage/TopNav/TopNav";
 import SideNav from "../../components/AppPage/SideNav/SideNav";
-import MoreApps from "./MoreApps/MoreApps";
+import Apps from "./Apps/Apps";
 import ToDo from "./../../modules/ToDo/ToDo";
 import Error404 from "./../ErrorPage/Error404";
 import TimeMachine from "./../../modules/TimeMachine/TimeMachine";
@@ -24,7 +24,7 @@ function AppPage() {
           <div className="main">SEARCH</div>
         </Route>
         <Route path="/apps">
-          <MoreApps />
+          <Apps />
         </Route>
         <Route path="/notifications">
           <div className="main">NOTIFICATIONS</div>

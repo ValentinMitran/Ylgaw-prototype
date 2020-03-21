@@ -1,9 +1,9 @@
 import React from "react";
 import {Link } from "react-router-dom";
-import "./MoreApps.scss";
+import "./Apps.scss";
 import { MdAccountBalance } from "react-icons/md";
 
-function MoreApps() {
+function Apps() {
   return (
     <>
       <div className="moreApps">
@@ -53,4 +53,4 @@ function MoreApps() {
   );
 }
 
-export default MoreApps;
+export default Apps;
