@@ -2,6 +2,8 @@ const router = require("express").Router();
 const verifyToken = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
 
+const Note = require("../models/timemachine/Note");
+
 const upload = require("./../utils/file-upload");
 const singleUpload = upload.single("daily");
 
@@ -28,7 +30,7 @@ router.post("/upload", verifyToken, function(req, res) {
   });
 });
 
-router.post("/get", verifyToken, (req, res) => {
+router.post("/get", verifyToken, async (req, res) => {
   const decoded = jwt.decode(req.header("authToken"));
 
   const s3 = new aws.S3();
@@ -37,7 +39,7 @@ router.post("/get", verifyToken, (req, res) => {
     req.body.month.toString() +
     req.body.year.toString();
   const image = `${decoded.username}/${date}.png`;
-
+  const note = await Note.findOne({ username: decoded.username, date: date });
   var params = {
     Bucket: "ylgaw",
     Key: image
@@ -48,8 +50,7 @@ router.post("/get", verifyToken, (req, res) => {
       res.send("false");
     } else {
       const img64 = Buffer.from(data.Body).toString("base64");
-      res.send(img64);
-
+      res.send({ img64, note });
       console.log("Loaded " + data.ContentLength + " bytes");
     }
   });
@@ -76,6 +77,23 @@ router.post("/remove", verifyToken, (req, res) => {
       res.send("Success");
     }
   });
+});
+
+router.post("/note/update", verifyToken, async (req, res) => {
+  const decoded = jwt.decode(req.header("authToken"));
+
+  const note = new Note({
+    username: decoded.username,
+    text: req.body.text,
+    date: req.body.date
+  });
+
+  try {
+    await note.save();
+    res.send("Success");
+  } catch (err) {
+    res.status(400).send(err);
+  }
 });
 
 module.exports = router;

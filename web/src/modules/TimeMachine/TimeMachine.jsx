@@ -9,6 +9,7 @@ function TimeMachine() {
   const [date, setDate] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [src, setSrc] = useState("");
+  const [note, setNote] = useState({});
   const [action, setAction] = useState(false);
   const [username, setUsername] = useState("");
   function initiateDate() {
@@ -37,7 +38,7 @@ function TimeMachine() {
       method: "Post",
       headers: {
         "Content-Type": "application/json",
-        "authToken": localStorage.authToken
+        authToken: localStorage.authToken
       },
       body: JSON.stringify({
         date: date.getDate(),
@@ -47,8 +48,11 @@ function TimeMachine() {
     }).catch(err => {
       alert(err);
     });
-    response = await response.text();
-    response === "false" ? setSrc(false) : setSrc(response);
+    response = await response.json();
+    response.img64 === "false" ? setSrc(false) : setSrc(response.img64);
+    response.note
+      ? setNote(response.note)
+      : setNote({ text: "No notes left..." });
     setIsLoading(false);
   }
 
@@ -95,6 +99,9 @@ function TimeMachine() {
               />
             )}
           </ActionContext.Provider>
+
+          <div className="notes">{note.text}</div>
+
           <div className="dateController">
             <button
               onClick={() => {
