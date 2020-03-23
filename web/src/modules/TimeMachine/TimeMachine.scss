@@ -25,12 +25,20 @@
     margin: auto;
     display: block;
   }
-.notes{
-  width: 650px;
-  min-height: 200px;
-  margin: auto;
-  background-color: bisque;
-  padding: 20px;
-  box-sizing: border-box;
-}
+  .notes {
+    width: 650px;
+    min-height: 200px;
+    margin: auto;
+    background-color: rgb(165, 165, 165);
+    padding: 30px 20px;
+    box-sizing: border-box;
+
+    svg {
+      position: fixed;
+      font-size: 20px;
+      margin-top: -20px;
+      margin-left: 560px;
+      cursor: pointer;
+    }
+  }
 }

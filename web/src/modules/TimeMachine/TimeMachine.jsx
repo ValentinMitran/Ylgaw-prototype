@@ -3,6 +3,7 @@ import Uploader from "./controllers/Uploader/Uploader";
 import Remover from "./controllers/Remover/Remover";
 import "./TimeMachine.scss";
 import ActionContext from "./ActionContext";
+import Notes from "./Notes";
 const jwt = require("jsonwebtoken");
 
 function TimeMachine() {
@@ -100,8 +101,14 @@ function TimeMachine() {
             )}
           </ActionContext.Provider>
 
-          <div className="notes">{note.text}</div>
-
+          <Notes
+            text={note.text}
+            date={
+              date.getDate().toString() +
+              (date.getMonth() + 1).toString() +
+              date.getFullYear().toString()
+            }
+          />
           <div className="dateController">
             <button
               onClick={() => {
