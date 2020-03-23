@@ -10,8 +10,8 @@ function TopNav() {
         <div className="menuNBrand">
           <MdMenu />
           <img
-            src="https://raw.githubusercontent.com/ValentinMitran/CyberCore/master/CyberCore.png"
-            alt="CyberCore"
+            src="https://raw.githubusercontent.com/ValentinMitran/ylgaw/master/Ylgaw.png"
+            alt="Ylgaw"
           />
         </div>
 

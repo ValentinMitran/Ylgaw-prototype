@@ -12,13 +12,13 @@ function SideNav() {
             <MdHome />
             <span>Feed</span>
           </Link>
-          <Link to={`/home`}>
+          <Link to={`/napchart`}>
             <MdPeople />
-            <span>Social</span>
+            <span>NapChart</span>
           </Link>
-          <Link to={`/home`}>
+          <Link to={`/timemachine`}>
             <MdStore />
-            <span>Shop</span>
+            <span>TimeMachine</span>
           </Link>
           <Link id="logout" to={`/logout`}>
             <MdExitToApp />

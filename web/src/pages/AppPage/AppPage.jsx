@@ -6,6 +6,8 @@ import Apps from "./Apps/Apps";
 import ToDo from "./../../modules/ToDo/ToDo";
 import Error404 from "./../ErrorPage/Error404";
 import TimeMachine from "./../../modules/TimeMachine/TimeMachine";
+import NapChart from './../../modules/NapChart/NapChart';
+
 import "./AppPage.scss";
 
 function AppPage() {
@@ -34,6 +36,9 @@ function AppPage() {
         </Route>
         <Route path="/todo">
           <ToDo />
+        </Route>
+        <Route path="/napchart">
+          <NapChart/>
         </Route>
         <Route path="/timemachine">
           <TimeMachine />
