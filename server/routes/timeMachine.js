@@ -81,7 +81,7 @@ router.post("/remove", verifyToken, (req, res) => {
 
 router.post("/note/update", verifyToken, async (req, res) => {
   const decoded = jwt.decode(req.header("authToken"));
-  Note.countDocuments({ username: decoded.username }, async function(
+  Note.countDocuments({ username: decoded.username,date:req.body.date }, async function(
     err,
     count
   ) {
@@ -91,7 +91,6 @@ router.post("/note/update", verifyToken, async (req, res) => {
         text: req.body.text,
         date: req.body.date
       });
-
       try {
         await note.save();
         res.send("Success");
