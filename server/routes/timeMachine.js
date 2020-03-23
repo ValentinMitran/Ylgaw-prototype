@@ -81,19 +81,31 @@ router.post("/remove", verifyToken, (req, res) => {
 
 router.post("/note/update", verifyToken, async (req, res) => {
   const decoded = jwt.decode(req.header("authToken"));
+  Note.countDocuments({ username: decoded.username }, async function(
+    err,
+    count
+  ) {
+    if (count == 0) {
+      const note = new Note({
+        username: decoded.username,
+        text: req.body.text,
+        date: req.body.date
+      });
 
-  const note = new Note({
-    username: decoded.username,
-    text: req.body.text,
-    date: req.body.date
+      try {
+        await note.save();
+        res.send("Success");
+      } catch (err) {
+        res.status(400).send(err);
+      }
+    } else {
+      await Note.updateOne(
+        { username: decoded.username, date: req.body.date },
+        { text: req.body.text }
+      );
+      res.send("Success");
+    }
   });
-
-  try {
-    await note.save();
-    res.send("Success");
-  } catch (err) {
-    res.status(400).send(err);
-  }
 });
 
 module.exports = router;
