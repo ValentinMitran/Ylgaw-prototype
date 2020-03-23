@@ -16,7 +16,7 @@ function Uploader(props) {
     let response = await fetch("/api/timeMachine/upload", {
       method: "POST",
       headers: {
-        "auth-token": localStorage.authToken
+        "authToken": localStorage.authToken
       },
       body: formData
     }).catch(err => {

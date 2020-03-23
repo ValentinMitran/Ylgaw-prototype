@@ -29,7 +29,7 @@ router.post("/upload", verifyToken, function(req, res) {
 });
 
 router.post("/get", verifyToken, (req, res) => {
-  const decoded = jwt.decode(req.header("auth-token"));
+  const decoded = jwt.decode(req.header("authToken"));
 
   const s3 = new aws.S3();
   const date =
@@ -56,7 +56,7 @@ router.post("/get", verifyToken, (req, res) => {
 });
 
 router.post("/remove", verifyToken, (req, res) => {
-  const decoded = jwt.decode(req.header("auth-token"));
+  const decoded = jwt.decode(req.header("authToken"));
 
   const s3 = new aws.S3();
   const date =

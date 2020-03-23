@@ -15,7 +15,7 @@ function PrivateRoute({ children, ...rest }) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": localStorage.authToken
+        "authToken": localStorage.authToken
       }
     }).catch(err => {
       alert(err);

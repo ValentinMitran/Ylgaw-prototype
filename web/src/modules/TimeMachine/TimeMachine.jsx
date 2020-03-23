@@ -37,7 +37,7 @@ function TimeMachine() {
       method: "Post",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": localStorage.authToken
+        "authToken": localStorage.authToken
       },
       body: JSON.stringify({
         date: date.getDate(),

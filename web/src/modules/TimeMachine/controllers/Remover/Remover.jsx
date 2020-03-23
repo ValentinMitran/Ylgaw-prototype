@@ -11,7 +11,7 @@ function Remover(props) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": localStorage.authToken
+        "authToken": localStorage.authToken
       },
       body: JSON.stringify({
         date: props.date,
