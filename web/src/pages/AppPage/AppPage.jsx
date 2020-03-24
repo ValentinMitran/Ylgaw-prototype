@@ -7,6 +7,7 @@ import ToDo from "./../../modules/ToDo/ToDo";
 import Error404 from "./../ErrorPage/Error404";
 import TimeMachine from "./../../modules/TimeMachine/TimeMachine";
 import NapChart from './../../modules/NapChart/NapChart';
+import Profile from './Profile/Profile';
 
 import "./AppPage.scss";
 
@@ -32,7 +33,7 @@ function AppPage() {
           <div className="main">NOTIFICATIONS</div>
         </Route>
         <Route path="/profile">
-          <div className="main">PROFILE</div>
+          <Profile/>
         </Route>
         <Route path="/todo">
           <ToDo />
