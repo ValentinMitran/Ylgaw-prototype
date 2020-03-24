@@ -7,6 +7,7 @@ dotenv.config();
 //Import Routes
 const authRoute = require('./routes/auth');
 const timeMachineRoute = require('./routes/timeMachine');
+const todoRoute = require('./routes/todo');
 
 //Connect to DB
 mongoose.connect(
@@ -21,5 +22,6 @@ app.use(express.json());
 //Route Middlewares
 app.use("/api/user", authRoute);
 app.use("/api/timeMachine", timeMachineRoute);
+app.use("/api/todo",todoRoute);
 
 app.listen(process.env.PORT || 3001, () => console.log("Express running"));
