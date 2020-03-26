@@ -17,13 +17,11 @@
 
 ## Key Features
 
-* Time Machine (Diary)(In progress...)
-* To be written
-* To be written
+* Time Machine (Diary)
+* Wallet System (Stripe Integration)
 
 ## TO DO
 
-* Wallet System
 * Ad Posting System
 * Chat
 * More...
