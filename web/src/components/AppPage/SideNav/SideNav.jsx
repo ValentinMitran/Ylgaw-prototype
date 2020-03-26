@@ -10,7 +10,7 @@ function SideNav() {
         <nav>
           <Link to={`/home`}>
             <MdHome />
-            <span>Feed</span>
+            <span>Home</span>
           </Link>
           <Link to={`/napchart`}>
             <MdPeople />

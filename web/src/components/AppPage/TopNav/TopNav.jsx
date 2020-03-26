@@ -34,7 +34,6 @@ function TopNav() {
             </div>
           </div>
 
-          <MdGridOn />
           <MdNotifications />
 
           <div className="dropdown">
@@ -46,8 +45,7 @@ function TopNav() {
             </button>
             <div className="dropdown-content">
               <Link to={`/profile`}>Profile</Link>
-              <Link to={`/home`}>Top Up</Link>
-              <Link to={`/home`}>Settings</Link>
+              <Link to={`/settings`}>Settings</Link>
               <Link to={`/logout`}>Logout</Link>
             </div>
           </div>
