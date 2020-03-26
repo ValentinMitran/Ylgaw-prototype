@@ -6,6 +6,7 @@ import AppPage from "./../pages/AppPage/AppPage";
 import LoginPage from "./../pages/AuthPage/LoginPage";
 import RegisterPage from "./../pages/AuthPage/RegisterPage";
 import Logout from "./../utils/Logout";
+import { BalanceProvider } from "../utils/BalanceContext";
 
 function Routes() {
   return (
@@ -22,7 +23,9 @@ function Routes() {
             <Logout />
           </Route>
           <PrivateRoute path="/*">
-            <AppPage />
+            <BalanceProvider>
+              <AppPage />
+            </BalanceProvider>
           </PrivateRoute>
         </Switch>
       </Router>

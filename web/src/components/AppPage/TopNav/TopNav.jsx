@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { MdGridOn, MdMenu, MdNotifications, MdAdd } from "react-icons/md";
+import { MdGridOn, MdMenu, MdNotifications } from "react-icons/md";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { BalanceContext } from "../../../utils/BalanceContext";
 
 import "./TopNav.scss";
 
 function TopNav() {
+  const [balance, setBalance] = useContext(BalanceContext);
+
   return (
     <>
       <div className="topbar">
@@ -19,7 +22,7 @@ function TopNav() {
 
         <div className="userArea">
           <div className="dropdown">
-            <button className="dropwalletbtn">5&euro;</button>
+            <button className="dropwalletbtn">{balance}&euro;</button>
             <div className="dropdown-content">
               <Link to={`/topup`}>
                 <FaPlus /> Deposit
