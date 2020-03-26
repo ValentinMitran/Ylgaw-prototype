@@ -6,8 +6,9 @@ import Apps from "./Apps/Apps";
 import ToDo from "./../../modules/ToDo/ToDo";
 import Error404 from "./../ErrorPage/Error404";
 import TimeMachine from "./../../modules/TimeMachine/TimeMachine";
-import NapChart from './../../modules/NapChart/NapChart';
-import Profile from './Profile/Profile';
+import NapChart from "./../../modules/NapChart/NapChart";
+import Profile from "./Profile/Profile";
+import Wallet from "./Wallet/Wallet";
 
 import "./AppPage.scss";
 
@@ -26,24 +27,30 @@ function AppPage() {
         <Route path="/search">
           <div className="main">SEARCH</div>
         </Route>
-        <Route path="/apps">
-          <Apps />
-        </Route>
         <Route path="/notifications">
           <div className="main">NOTIFICATIONS</div>
         </Route>
         <Route path="/profile">
-          <Profile/>
+          <Profile />
         </Route>
+        <Route path="/wallet">
+          <Wallet />
+        </Route>
+
+        <Route path="/apps">
+          <Apps />
+        </Route>
+        {/* MODULES */}
         <Route path="/todo">
           <ToDo />
         </Route>
         <Route path="/napchart">
-          <NapChart/>
+          <NapChart />
         </Route>
         <Route path="/timemachine">
           <TimeMachine />
         </Route>
+
         <Route path="*">
           <Error404 />
         </Route>
