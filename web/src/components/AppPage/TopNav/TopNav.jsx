@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MdGridOn, MdMenu, MdNotifications } from "react-icons/md";
+import { MdGridOn, MdMenu, MdNotifications, MdAdd } from "react-icons/md";
+import { FaMinus, FaPlus } from "react-icons/fa";
+
 import "./TopNav.scss";
 
 function TopNav() {
@@ -16,9 +18,22 @@ function TopNav() {
         </div>
 
         <div className="userArea">
-          5&euro;
+          <div className="dropdown">
+            <button className="dropwalletbtn">5&euro;</button>
+            <div className="dropdown-content">
+              <Link to={`/topup`}>
+                <FaPlus /> Deposit
+              </Link>
+              <Link to={`/withdraw`}>
+                <FaMinus />
+                Withdraw
+              </Link>
+            </div>
+          </div>
+
           <MdGridOn />
           <MdNotifications />
+
           <div className="dropdown">
             <button className="dropbtn">
               <img
