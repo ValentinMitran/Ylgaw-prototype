@@ -64,9 +64,11 @@ function TimeMachine() {
   if (isLoading) {
     return (
       <>
-        <div className="timeMachine">
-          <h4>Time Machine</h4>
-          Loading...
+        <div className="main">
+          <div className="timeMachine">
+            <h4>Time Machine</h4>
+            Loading...
+          </div>
         </div>
       </>
     );
@@ -92,12 +94,13 @@ function TimeMachine() {
                 year={date.getFullYear()}
                 username={username}
               />
-            ) : (
+            ) : (<>
               <Remover
                 date={date.getDate()}
                 month={date.getMonth() + 1}
                 year={date.getFullYear()}
               />
+              <a download href={`data:image/png;base64,${src}`}>Download</a></>
             )}
           </ActionContext.Provider>
 
