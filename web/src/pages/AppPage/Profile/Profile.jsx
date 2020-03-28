@@ -1,9 +1,75 @@
-import React from "react";
-import { Link, Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  withRouter,
+  useParams,
+  useRouteMatch
+} from "react-router-dom";
 import "./Profile.scss";
+import Feed from "./Skeleton/Feed";
+import Following from "./Skeleton/Following";
+import Followers from "./Skeleton/Followers";
+import Shop from './Skeleton/Shop';
+const jwt = require("jsonwebtoken");
 
-function Profile() {
+function Profile({ history }) {
   let { path, url } = useRouteMatch();
+  const [profile, setProfile] = useState([]);
+  const [loading, setLoading] = useState(false);
+  let { username } = useParams();
+
+  async function getProfileData() {
+    const decodedjwt = jwt.decode(localStorage.authToken);
+    let userExists = false;
+    let target = await fetch("/api/profile/verifyUserName", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        authToken: localStorage.authToken
+      },
+      body: JSON.stringify({
+        username: username
+      })
+    });
+    if (target.ok) {
+      target = await target.json();
+      userExists = true;
+    }
+
+    if (!userExists) {
+      history.push(`${decodedjwt.username}`);
+    }
+
+    let response = await fetch("/api/profile/getProfileData", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        authToken: localStorage.authToken
+      },
+      body: JSON.stringify({
+        username: username
+      })
+    });
+    response = await response.json();
+    setProfile(response);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    getProfileData();
+  }, [username]);
+
+  if (loading) {
+    return (
+      <div>
+        <div className="main">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="main">
       <div className="profileContainer">
@@ -15,7 +81,7 @@ function Profile() {
             />
             <div className="profileName">
               {" "}
-              <span className="username">@username</span>{" "}
+              <span className="username">@{profile.username}</span>{" "}
               <span> "The One And Only"</span>
             </div>
 
@@ -30,24 +96,22 @@ function Profile() {
             </div>
           </div>
           <nav>
-            <Link to={`${url}/link1`}>Link1</Link>
-            <Link to={`${url}/link2`}>Link2</Link>
-            <Link to={`${url}/link3`}>Link3</Link>
-            <Link to={`${url}/link4`}>Link4</Link>
-            <Link to={`${url}/link5`}>Link5</Link>
+            <Link to={`${url}/feed`}>Feed</Link>
+            <Link to={`${url}/shop`}>Shop</Link>
+            <Link to={`${url}/followers`}>Followers</Link>
+            <Link to={`${url}/following`}>Following</Link>
           </nav>
         </div>
         <div className="profileMain">
           <Switch>
-            <Route exact path={`${path}/`}>
+          
+            <Route path={`${path}/feed`}><Feed/></Route>
+            <Route path={`${path}/shop`}><Shop/></Route>
+            <Route path={`${path}/followers`}><Followers/></Route>
+            <Route path={`${path}/following`}><Following/></Route>
+            <Route path={`${path}/`}>
               PROFILE PAGE
             </Route>
-            <Route path={`${path}/link1`}>LINK1</Route>
-            <Route path={`${path}/link2`}>LINK2</Route>
-            <Route path={`${path}/link3`}>LINK3</Route>
-            <Route path={`${path}/link4`}>LINK4</Route>
-            <Route path={`${path}/link5`}>LINK5</Route>
-
             <Route path="/*">
               <Redirect to={`${url}/`} />
             </Route>
@@ -58,4 +122,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default withRouter(Profile);

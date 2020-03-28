@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import TopNav from "../../components/AppPage/TopNav/TopNav";
 import SideNav from "../../components/AppPage/SideNav/SideNav";
@@ -10,10 +10,19 @@ import NapChart from "./../../modules/NapChart/NapChart";
 import Profile from "./Profile/Profile";
 import Wallet from "./Wallet/Wallet";
 import Pomodoro from "./../../modules/Pomodoro/Pomodoro";
-
 import "./AppPage.scss";
-
+const jwt = require("jsonwebtoken");
 function AppPage() {
+  const [decodedjwt, setDecodedjwt] = useState([]);
+
+  function decodejwt() {
+    const decodedjwt = jwt.decode(localStorage.authToken);
+    setDecodedjwt(decodedjwt);
+  }
+
+  useEffect(() => {
+    decodejwt();
+  }, []);
   return (
     <>
       <TopNav />
@@ -31,7 +40,11 @@ function AppPage() {
         <Route path="/notifications">
           <div className="main">NOTIFICATIONS</div>
         </Route>
+
         <Route path="/profile">
+          <Redirect to={`/u/${decodedjwt}`} />
+        </Route>
+        <Route path="/u/:username">
           <Profile />
         </Route>
         <Route path="/wallet">
