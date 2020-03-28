@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const verifyToken = require("../utils/verifyToken");
 const User = require("../models/User");
+const Followed = require("../models/Follows/Followed");
+const Following = require("../models/Follows/Following");
 const {
   registerValidation,
   loginValidation
@@ -33,6 +35,17 @@ router.post("/register", async (req, res) => {
 
   try {
     const savedUser = await user.save();
+
+    const following = new Following({
+      username: treatedUsername,
+      following: "valentin"
+    });
+    const followed = new Followed({
+      username: treatedUsername
+    });
+
+    await following.save();
+    await followed.save();
     res.send("Success");
   } catch (err) {
     res.status(400).send(err);

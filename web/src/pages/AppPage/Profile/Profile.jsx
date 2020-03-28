@@ -12,7 +12,7 @@ import "./Profile.scss";
 import Feed from "./Skeleton/Feed";
 import Following from "./Skeleton/Following";
 import Followers from "./Skeleton/Followers";
-import Shop from './Skeleton/Shop';
+import Shop from "./Skeleton/Shop";
 const jwt = require("jsonwebtoken");
 
 function Profile({ history }) {
@@ -82,16 +82,18 @@ function Profile({ history }) {
             <div className="profileName">
               {" "}
               <span className="username">@{profile.username}</span>{" "}
-              <span> "The One And Only"</span>
+              <span> {profile.title}</span>
             </div>
 
             <div className="followsCounter">
               <Link to="/">
-                5<span> Following</span>
+                {profile.following}
+                <span> Following</span>
               </Link>
               <Link to="/">
                 {" "}
-                10<span> Followers</span>
+                {profile.followers}
+                <span> Followers</span>
               </Link>
             </div>
           </div>
@@ -104,14 +106,19 @@ function Profile({ history }) {
         </div>
         <div className="profileMain">
           <Switch>
-          
-            <Route path={`${path}/feed`}><Feed/></Route>
-            <Route path={`${path}/shop`}><Shop/></Route>
-            <Route path={`${path}/followers`}><Followers/></Route>
-            <Route path={`${path}/following`}><Following/></Route>
-            <Route path={`${path}/`}>
-              PROFILE PAGE
+            <Route path={`${path}/feed`}>
+              <Feed />
             </Route>
+            <Route path={`${path}/shop`}>
+              <Shop />
+            </Route>
+            <Route path={`${path}/followers`}>
+              <Followers />
+            </Route>
+            <Route path={`${path}/following`}>
+              <Following />
+            </Route>
+            <Route path={`${path}/`}>PROFILE PAGE</Route>
             <Route path="/*">
               <Redirect to={`${url}/`} />
             </Route>
