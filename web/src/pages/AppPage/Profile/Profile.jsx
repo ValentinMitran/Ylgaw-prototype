@@ -77,7 +77,7 @@ function Profile({ history }) {
           <div className="profileData">
             <img
               src="https://www.pearsoncollege.ca/wp-content/uploads/2019/12/placeholder-profile.jpg"
-              alt=""
+              alt="Profile picture"
             />
             <div className="profileName">
               {" "}
@@ -86,11 +86,11 @@ function Profile({ history }) {
             </div>
 
             <div className="followsCounter">
-              <Link to="/">
+            <Link to={`${url}/following`}>
                 {profile.following}
                 <span> Following</span>
               </Link>
-              <Link to="/">
+              <Link to={`${url}/followers`}>
                 {" "}
                 {profile.followers}
                 <span> Followers</span>
@@ -100,8 +100,7 @@ function Profile({ history }) {
           <nav>
             <Link to={`${url}/feed`}>Feed</Link>
             <Link to={`${url}/shop`}>Shop</Link>
-            <Link to={`${url}/followers`}>Followers</Link>
-            <Link to={`${url}/following`}>Following</Link>
+         
           </nav>
         </div>
         <div className="profileMain">
