@@ -1,0 +1,56 @@
+.pomodoro {
+  overflow: hidden;
+  span {
+    color: red;
+    font-size: 40px;
+    font-weight: 600;
+  }
+  svg {
+    background-color: #ffffff;
+    border: 2px solid rgb(110, 15, 15);
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+  }
+
+  .timer {
+    width: 800px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: greenyellow;
+    p {
+      font-size: 30px;
+      font-weight: 700;
+    }
+  }
+  .settings {
+    width: 800px;
+    margin: auto;
+    display: flex;
+    p {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
+  .session {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: hotpink;
+  }
+
+  .break {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: indigo;
+  }
+  .controllers {
+    margin-top: 10px;
+  }
+}

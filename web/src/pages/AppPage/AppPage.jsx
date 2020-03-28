@@ -9,6 +9,7 @@ import TimeMachine from "./../../modules/TimeMachine/TimeMachine";
 import NapChart from "./../../modules/NapChart/NapChart";
 import Profile from "./Profile/Profile";
 import Wallet from "./Wallet/Wallet";
+import Pomodoro from "./../../modules/Pomodoro/Pomodoro";
 
 import "./AppPage.scss";
 
@@ -49,6 +50,9 @@ function AppPage() {
         </Route>
         <Route path="/timemachine">
           <TimeMachine />
+        </Route>
+        <Route path="/pomodoro">
+          <Pomodoro />
         </Route>
 
         <Route path="*">
