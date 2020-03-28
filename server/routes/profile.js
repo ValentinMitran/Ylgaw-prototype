@@ -76,4 +76,26 @@ router.post("/unfollow", verifyToken, async (req, res) => {
   res.send("Success");
 });
 
+router.post("/FollowingList", verifyToken, async (req, res) => {
+  const target = req.body.username;
+  const rawList = await Following.findOne({ username: target });
+  const list = await User.find(
+    { username: { $in: rawList.following } },
+    { _id: 1, username: 1 }
+  );
+
+  res.send(list);
+});
+
+router.post("/FollowersList", verifyToken, async (req, res) => {
+  const target = req.body.username;
+  const rawList = await Followed.findOne({ username: target });
+  const list = await User.find(
+    { username: { $in: rawList.followed } },
+    { _id: 1, username: 1 }
+  );
+
+  res.send(list);
+});
+
 module.exports = router;

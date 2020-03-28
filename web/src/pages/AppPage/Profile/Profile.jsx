@@ -112,10 +112,10 @@ function Profile({ history }) {
               <Shop />
             </Route>
             <Route path={`${path}/followers`}>
-              <Followers />
+              <Followers username={username} />
             </Route>
             <Route path={`${path}/following`}>
-              <Following />
+              <Following username={username}/>
             </Route>
             <Route path={`${path}/`}>PROFILE PAGE</Route>
             <Route path="/*">
