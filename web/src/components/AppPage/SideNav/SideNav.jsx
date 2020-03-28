@@ -16,6 +16,14 @@ function SideNav() {
             <MdPeople />
             <span>NapChart</span>
           </Link>
+          <Link to={`/todo`}>
+            <MdPeople />
+            <span>TODO</span>
+          </Link>
+          <Link to={`/pomodoro`}>
+            <MdPeople />
+            <span>Pomodoro</span>
+          </Link>
           <Link to={`/timemachine`}>
             <MdStore />
             <span>TimeMachine</span>
