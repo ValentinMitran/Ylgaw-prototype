@@ -4,8 +4,10 @@ import { GiBackwardTime } from "react-icons/gi";
 import "./Pomodoro.scss";
 
 function Pomodoro() {
-  const [timer, setTimer] = useState(25);
+  const [session, setSession] = useState(25);
   const [breakTime, setBreakTime] = useState(5);
+  const [minutes, setMinutes] = useState(session);
+  const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
   function toggle() {
@@ -13,32 +15,65 @@ function Pomodoro() {
   }
 
   function reset() {
+    setMinutes(session);
+    setSeconds(0);
     setIsActive(false);
   }
+  function toggle() {
+    setMinutes(session);
+    setSeconds(0);
+    setIsActive(!isActive);
+  }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    let interval = null;
+    if (isActive) {
+      let countDownDate = new Date();
+      countDownDate.setMinutes(countDownDate.getMinutes() + session);
+      countDownDate = countDownDate.getTime();
+
+      interval = setInterval(() => {
+        let now = new Date().getTime();
+        let distance = countDownDate - now;
+        setMinutes(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+        setSeconds(Math.floor((distance % (1000 * 60)) / 1000));
+      }, 1000);
+    } else if (!isActive && seconds !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive]);
+
   return (
     <>
       <div className="main pomodoro">
         <div className="timer">
           <p>Session</p>
-          <span>{timer}</span>
+          <span>
+            {isActive ? (
+              <>
+                {minutes}:{seconds}
+              </>
+            ) : (
+              session
+            )}
+          </span>
           <div className="controllers">
             {isActive ? (
               <FaPause onClick={() => toggle()} />
             ) : (
               <FaPlay onClick={() => toggle()} />
             )}
-            <GiBackwardTime />
+            <GiBackwardTime onClick={() => reset()} />
           </div>{" "}
         </div>
         <div className="settings">
           <div className="session">
             <p>Session</p>
-            <span>{timer}</span>
+            <span>{session}</span>
             <div className="controllers">
-              <FaPlus onClick={() => setTimer(timer + 1)} />
-              <FaMinus onClick={() => setTimer(timer - 1)} />
+              <FaPlus onClick={() => setSession(session + 1)} />
+              <FaMinus onClick={() => setSession(session - 1)} />
             </div>
           </div>
           <div className="break ">
