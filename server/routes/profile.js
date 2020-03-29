@@ -20,26 +20,49 @@ router.post("/verifyUserName", verifyToken, async (req, res) => {
 });
 
 router.post("/getProfileData", verifyToken, async (req, res) => {
+  const decoded = jwt.decode(req.header("authToken"));
+
   const user = await User.findOne(
     { username: req.body.username },
     { _id: 1, username: 1, title: 1 }
   );
   const followers = await Followed.aggregate([
-    { $match: { username: user.username } },
+    { $match: { username: req.body.username } },
     { $project: { _id: 0, qty: { $size: "$followed" } } }
   ]);
   const followings = await Following.aggregate([
-    { $match: { username: user.username } },
+    { $match: { username: req.body.username } },
     { $project: { _id: 0, qty: { $size: "$following" } } }
   ]);
+
+  let self;
+  let amFollowing;
+  if (decoded.username === req.body.username) {
+    self = true;
+  } else {
+    self = false;
+    let followingList = await Following.findOne({ username: decoded.username });
+    for (let i = 0; i < followingList.following.length; i++) {
+      if (followingList.following[i] === req.body.username) {
+        amFollowing = true;
+      }
+    }
+  }
   const profile = {
     _id: user._id,
     username: user.username,
     title: user.title,
     followers: followers[0].qty,
-    following: followings[0].qty
+    following: followings[0].qty,
+    self: self
   };
-  res.send(profile);
+  if (self == false && amFollowing == true) {
+    profile.amFollowing = true;
+  } else if (self == false) {
+    profile.amFollowing = false;
+  }
+
+  res.status(200).send(profile);
 });
 
 router.post("/follow", verifyToken, async (req, res) => {

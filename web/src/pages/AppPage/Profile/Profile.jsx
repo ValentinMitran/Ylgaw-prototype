@@ -13,11 +13,14 @@ import Feed from "./Skeleton/Feed";
 import Following from "./Skeleton/Following";
 import Followers from "./Skeleton/Followers";
 import Shop from "./Skeleton/Shop";
+import Follow from "./Follow";
+import Unfollow from "./Unfollow";
 const jwt = require("jsonwebtoken");
 
 function Profile({ history }) {
   let { path, url } = useRouteMatch();
   const [profile, setProfile] = useState([]);
+  const [following, setFollowing] = useState();
   const [loading, setLoading] = useState(false);
   let { username } = useParams();
 
@@ -55,12 +58,13 @@ function Profile({ history }) {
     });
     response = await response.json();
     setProfile(response);
+    setFollowing(response.amFollowing);
     setLoading(false);
   }
 
   useEffect(() => {
     getProfileData();
-  }, [username]);
+  }, [username, following]);
 
   if (loading) {
     return (
@@ -84,9 +88,15 @@ function Profile({ history }) {
               <span className="username">@{profile.username}</span>{" "}
               <span> {profile.title}</span>
             </div>
-
+            {profile.self == false ? (
+              following == true ? (
+                <Unfollow setFollowing={setFollowing} username={username} />
+              ) : (
+                <Follow setFollowing={setFollowing} username={username} />
+              )
+            ) : null}
             <div className="followsCounter">
-            <Link to={`${url}/following`}>
+              <Link to={`${url}/following`}>
                 {profile.following}
                 <span> Following</span>
               </Link>
@@ -100,7 +110,6 @@ function Profile({ history }) {
           <nav>
             <Link to={`${url}/feed`}>Feed</Link>
             <Link to={`${url}/shop`}>Shop</Link>
-         
           </nav>
         </div>
         <div className="profileMain">
@@ -115,7 +124,7 @@ function Profile({ history }) {
               <Followers username={username} />
             </Route>
             <Route path={`${path}/following`}>
-              <Following username={username}/>
+              <Following username={username} />
             </Route>
             <Route path={`${path}/`}>PROFILE PAGE</Route>
             <Route path="/*">
