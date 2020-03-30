@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ToDo.scss";
 import { MdDelete } from "react-icons/md";
 
-function ToDo() {
+function ToDo(props) {
   const [todos, setTodos] = useState([
     { text: "Be a well known developer" },
     { text: "Get a Job" },
@@ -26,8 +26,8 @@ function ToDo() {
   };
 
   return (
-    <div className="main">
-      <div className="todoList">
+    <div className={props.isSidebarOpen ? "main" : "mainSideClosed"}>
+    <div className="todoList">
         {todos.map((todo, index) => (
           <div className="todo" key={index} index={index}>
             {todo.text}

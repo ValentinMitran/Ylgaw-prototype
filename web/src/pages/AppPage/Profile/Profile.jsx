@@ -17,7 +17,7 @@ import Follow from "./Follow";
 import Unfollow from "./Unfollow";
 const jwt = require("jsonwebtoken");
 
-function Profile({ history }) {
+function Profile({ history }, props) {
   let { path, url } = useRouteMatch();
   const [profile, setProfile] = useState([]);
   const [following, setFollowing] = useState();
@@ -75,7 +75,7 @@ function Profile({ history }) {
   }
 
   return (
-    <div className="main">
+    <div className={props.isSidebarOpen ? "main" : "mainSideClosed"}>
       <div className="profileContainer">
         <div className="profileSide">
           <div className="profileData">

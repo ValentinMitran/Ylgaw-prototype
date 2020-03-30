@@ -1,19 +1,23 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { MdGridOn, MdMenu, MdNotifications } from "react-icons/md";
+import { MdGridOn, MdClose, MdMenu, MdNotifications } from "react-icons/md";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { BalanceContext } from "../../../utils/BalanceContext";
 
 import "./TopNav.scss";
 
-function TopNav() {
+function TopNav(props) {
   const [balance, setBalance] = useContext(BalanceContext);
 
   return (
     <>
       <div className="topbar">
         <div className="menuNBrand">
-          <MdMenu />
+          {props.isSidebarOpen ? (
+            <MdClose onClick={() => props.setIsSidebarOpen(false)} />
+          ) : (
+            <MdMenu onClick={() => props.setIsSidebarOpen(true)} />
+          )}
           <img
             src="https://raw.githubusercontent.com/ValentinMitran/ylgaw/master/Ylgaw.png"
             alt="Ylgaw"

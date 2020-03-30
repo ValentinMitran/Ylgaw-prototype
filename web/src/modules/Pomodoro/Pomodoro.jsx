@@ -3,7 +3,7 @@ import { FaPause, FaPlay, FaPlus, FaMinus } from "react-icons/fa";
 import { GiBackwardTime } from "react-icons/gi";
 import "./Pomodoro.scss";
 
-function Pomodoro() {
+function Pomodoro(props) {
   const [session, setSession] = useState(25);
   const [breakTime, setBreakTime] = useState(5);
   const [minutes, setMinutes] = useState(session);
@@ -46,7 +46,7 @@ function Pomodoro() {
 
   return (
     <>
-      <div className="main pomodoro">
+      <div className={props.isSidebarOpen ? "main pomodoro" : "mainSideClosed pomodoro" }>
         <div className="timer">
           <p>Session</p>
           <span>

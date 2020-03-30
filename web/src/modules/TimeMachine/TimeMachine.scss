@@ -25,19 +25,28 @@
     margin: auto;
     display: block;
   }
+  a{
+    width: 100px;
+    margin: auto;
+    display: block;
+      }
   .notes {
+    display: relative;
     width: 650px;
     min-height: 200px;
     margin: auto;
     background-color: rgb(165, 165, 165);
     padding: 30px 20px;
     box-sizing: border-box;
-
+    @media (max-width: 768px) {
+      width: calc(100% - 20px);
+      margin: 10px;
+    }
     svg {
       position: fixed;
       font-size: 20px;
       margin-top: -20px;
-      margin-left: 560px;
+      right: 10px;
       cursor: pointer;
     }
   }

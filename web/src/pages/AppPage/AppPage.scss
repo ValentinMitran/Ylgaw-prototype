@@ -6,3 +6,10 @@
   margin-left: 72px;
   overflow-x: hidden;
 }
+.mainSideClosed {
+  width: 100vw;
+  height: calc(100vh - 56px);
+  background-color: #F9F9F9;
+  margin-top: 56px;
+  overflow-x: hidden;
+}

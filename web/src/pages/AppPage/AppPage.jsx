@@ -14,6 +14,7 @@ import "./AppPage.scss";
 const jwt = require("jsonwebtoken");
 function AppPage() {
   const [decodedjwt, setDecodedjwt] = useState([]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   function decodejwt() {
     const decodedjwt = jwt.decode(localStorage.authToken);
@@ -25,47 +26,56 @@ function AppPage() {
   }, []);
   return (
     <>
-      <TopNav />
-      <SideNav />
+      <TopNav
+        isSidebarOpen={isSidebarOpen}
+        setIsSidebarOpen={setIsSidebarOpen}
+      />
+      {isSidebarOpen ? <SideNav /> : null}
       <Switch>
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
         <Route path="/home">
-          <div className="main">HOME PAGE</div>
+          <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
+            HOME PAGE
+          </div>
         </Route>
         <Route path="/search">
-          <div className="main">SEARCH</div>
+          <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
+            SEARCH
+          </div>
         </Route>
         <Route path="/notifications">
-          <div className="main">NOTIFICATIONS</div>
+          <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
+            NOTIFICATIONS
+          </div>
         </Route>
 
         <Route path="/profile">
           <Redirect to={`/u/${decodedjwt}`} />
         </Route>
         <Route path="/u/:username">
-          <Profile />
+          <Profile isSidebarOpen={isSidebarOpen} />
         </Route>
         <Route path="/wallet">
-          <Wallet />
+          <Wallet isSidebarOpen={isSidebarOpen} />
         </Route>
 
         <Route path="/apps">
-          <Apps />
+          <Apps isSidebarOpen={isSidebarOpen} />
         </Route>
         {/* MODULES */}
         <Route path="/todo">
-          <ToDo />
+          <ToDo isSidebarOpen={isSidebarOpen} />
         </Route>
         <Route path="/napchart">
-          <NapChart />
+          <NapChart isSidebarOpen={isSidebarOpen} />
         </Route>
         <Route path="/timemachine">
-          <TimeMachine />
+          <TimeMachine isSidebarOpen={isSidebarOpen} />
         </Route>
         <Route path="/pomodoro">
-          <Pomodoro />
+          <Pomodoro isSidebarOpen={isSidebarOpen} />
         </Route>
 
         <Route path="*">

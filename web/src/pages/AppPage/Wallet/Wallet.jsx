@@ -7,7 +7,7 @@ import { BalanceContext } from "../../../utils/BalanceContext";
 
 const stripePromise = loadStripe("pk_test_bpOsvYFxdzalr4Pk4TKbLh0s00mkqCEhEh");
 
-function Wallet() {
+function Wallet(props) {
   const [topUp, setTopUp] = useState(5);
   const [update, setUpdate] = useState(false);
   const [balance, setBalance] = useContext(BalanceContext);
@@ -20,7 +20,7 @@ function Wallet() {
   if (!update) {
     return (
       <>
-        <div className="main">
+      <div className={props.isSidebarOpen ? "main" : "mainSideClosed"}>
           <form onSubmit={handleSubmit}>
             <input
               type="number"

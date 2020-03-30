@@ -6,7 +6,7 @@ import ActionContext from "./ActionContext";
 import Notes from "./Notes";
 const jwt = require("jsonwebtoken");
 
-function TimeMachine() {
+function TimeMachine(props) {
   const [date, setDate] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [src, setSrc] = useState("");
@@ -76,7 +76,7 @@ function TimeMachine() {
 
   return (
     <>
-      <div className="main">
+      <div className={props.isSidebarOpen ? "main" : "mainSideClosed"}>
         <div className="timeMachine">
           <h4>Time Machine</h4>
           {!src ? (
@@ -84,7 +84,12 @@ function TimeMachine() {
               <h4>EMPTY</h4>
             </div>
           ) : (
-            <img src={`data:image/png;base64,${src}`} alt="" />
+            <>
+              <img src={`data:image/png;base64,${src}`} alt="" />
+              <a download href={`data:image/png;base64,${src}`}>
+                Download
+              </a>
+            </>
           )}
           <ActionContext.Provider value={[action, setAction]}>
             {!src ? (
@@ -94,13 +99,14 @@ function TimeMachine() {
                 year={date.getFullYear()}
                 username={username}
               />
-            ) : (<>
-              <Remover
-                date={date.getDate()}
-                month={date.getMonth() + 1}
-                year={date.getFullYear()}
-              />
-              <a download href={`data:image/png;base64,${src}`}>Download</a></>
+            ) : (
+              <>
+                <Remover
+                  date={date.getDate()}
+                  month={date.getMonth() + 1}
+                  year={date.getFullYear()}
+                />
+              </>
             )}
           </ActionContext.Provider>
 

@@ -1,10 +1,12 @@
 import React from "react";
 import "./NapChart.scss";
 
-function NapChart() {
+function NapChart(props) {
   return (
     <>
-      <div className="main">NapChart</div>
+      <div className={props.isSidebarOpen ? "main" : "mainSideClosed"}>
+        NapChart
+        </div>
     </>
   );
 }
