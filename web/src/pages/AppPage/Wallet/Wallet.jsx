@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CardForm from "./CardForm";
@@ -20,7 +20,7 @@ function Wallet(props) {
   if (!update) {
     return (
       <>
-      <div className={props.isSidebarOpen ? "main" : "mainSideClosed"}>
+        <div className={props.isSidebarOpen ? "main" : "mainSideClosed"}>
           <form onSubmit={handleSubmit}>
             <input
               type="number"

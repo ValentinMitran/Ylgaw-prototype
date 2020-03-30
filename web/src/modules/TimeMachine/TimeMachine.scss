@@ -25,11 +25,11 @@
     margin: auto;
     display: block;
   }
-  a{
+  a {
     width: 100px;
     margin: auto;
     display: block;
-      }
+  }
   .notes {
     display: relative;
     width: 650px;
@@ -41,6 +41,11 @@
     @media (max-width: 768px) {
       width: calc(100% - 20px);
       margin: 10px;
+    }
+    textarea {
+      width: 100%;
+      background-color: #b3b3b3;
+      border: none;
     }
     svg {
       position: fixed;

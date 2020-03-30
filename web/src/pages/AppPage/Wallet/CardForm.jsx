@@ -55,7 +55,7 @@ const CardForm = props => {
       return;
     }
 
-    const payload = await stripe.createPaymentMethod({
+    await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement)
     });
