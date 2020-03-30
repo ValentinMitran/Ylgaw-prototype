@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MdExitToApp, MdHome, MdPeople, MdStore } from "react-icons/md";
+import { MdExitToApp, MdApps, MdHome, MdPeople, MdStore } from "react-icons/md";
 import "./SideNav.scss";
 
 function SideNav() {
@@ -12,22 +12,25 @@ function SideNav() {
             <MdHome />
             <span>Home</span>
           </Link>
-          <Link to={`/napchart`}>
+          <Link to={`/social`}>
             <MdPeople />
-            <span>NapChart</span>
+            <span>Social</span>
           </Link>
-          <Link to={`/todo`}>
-            <MdPeople />
-            <span>TODO</span>
-          </Link>
-          <Link to={`/pomodoro`}>
-            <MdPeople />
-            <span>Pomodoro</span>
-          </Link>
-          <Link to={`/timemachine`}>
+          <Link to={`/store`}>
             <MdStore />
-            <span>TimeMachine</span>
+            <span>Store</span>
           </Link>
+          <Link id="apps">
+            <MdApps />
+            <span>Apps</span>
+            <div className="apps">
+              <Link to={`/todo`}>Todo</Link>
+              <Link to={`/napchart`}>Napchart</Link>
+              <Link to={`/pomodoro`}>Pomodoro</Link>
+              <Link to={`/timemachine`}>Time Machine</Link>
+            </div>
+          </Link>
+
           <Link id="logout" to={`/logout`}>
             <MdExitToApp />
             <span>Logout</span>

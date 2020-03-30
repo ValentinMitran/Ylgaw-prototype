@@ -5,7 +5,6 @@
   background-color: #ffffff;
   position: fixed;
   bottom: 0;
-  overflow: hidden;
 
   nav {
     display: flex;
@@ -31,6 +30,7 @@
   nav span {
     font-size: 14px;
     color: #000000;
+    overflow: hidden;
   }
 
   /* Change icon to text*/
@@ -43,6 +43,28 @@
     background: rgb(247, 247, 247);
   }
 
+  #apps {
+    display: relative;
+    &:hover .apps {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .apps {
+    display: none;
+    width: 150px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    margin-top: -50px;
+    margin-left: 72px;
+
+    a {
+      &:hover {
+        background-color: #f1f1f1;
+      }
+    }
+  }
   #logout {
     position: fixed;
     width: 72px;

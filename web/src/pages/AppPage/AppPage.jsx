@@ -40,9 +40,22 @@ function AppPage() {
             HOME PAGE
           </div>
         </Route>
+        <Route path="/social">
+          <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
+            Social
+          </div>
+        </Route>
+        <Route path="/store">
+          <div className={isSidebarOpen ? "main" : "mainSideClosed"}>Store</div>
+        </Route>
         <Route path="/search">
           <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
             SEARCH
+          </div>
+        </Route>
+        <Route path="/settings">
+          <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
+            Settings
           </div>
         </Route>
         <Route path="/notifications">

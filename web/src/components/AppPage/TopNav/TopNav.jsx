@@ -1,13 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { MdGridOn, MdClose, MdMenu, MdNotifications } from "react-icons/md";
+import { MdClose, MdMenu, MdNotifications } from "react-icons/md";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { BalanceContext } from "../../../utils/BalanceContext";
 
 import "./TopNav.scss";
-
+const jwt = require("jsonwebtoken");
 function TopNav(props) {
   const [balance, setBalance] = useContext(BalanceContext);
+  const [decodedjwt, setDecodedjwt] = useState(
+    jwt.decode(localStorage.authToken)
+  );
 
   return (
     <>
@@ -28,10 +31,10 @@ function TopNav(props) {
           <div className="dropdown">
             <button className="dropwalletbtn">{balance}&euro;</button>
             <div className="dropdown-content">
-              <Link to={`/topup`}>
+              <Link to={`/wallet`}>
                 <FaPlus /> Deposit
               </Link>
-              <Link to={`/withdraw`}>
+              <Link to={`/wallet`}>
                 <FaMinus />
                 Withdraw
               </Link>
@@ -48,7 +51,7 @@ function TopNav(props) {
               />
             </button>
             <div className="dropdown-content">
-              <Link to={`/profile`}>Profile</Link>
+              <Link to={`/u/${decodedjwt.username}`}>Profile</Link>
               <Link to={`/settings`}>Settings</Link>
               <Link to={`/logout`}>Logout</Link>
             </div>

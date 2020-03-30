@@ -81,15 +81,15 @@ function Profile(props) {
           <div className="profileData">
             <img
               src="https://www.pearsoncollege.ca/wp-content/uploads/2019/12/placeholder-profile.jpg"
-              alt="Profile picture"
+              alt="Profile"
             />
             <div className="profileName">
               {" "}
               <span className="username">@{profile.username}</span>{" "}
               <span> {profile.title}</span>
             </div>
-            {profile.self == false ? (
-              following == true ? (
+            {profile.self === false ? (
+              following === true ? (
                 <Unfollow setFollowing={setFollowing} username={username} />
               ) : (
                 <Follow setFollowing={setFollowing} username={username} />
