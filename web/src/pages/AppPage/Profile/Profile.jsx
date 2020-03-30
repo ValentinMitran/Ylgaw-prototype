@@ -17,7 +17,7 @@ import Follow from "./Follow";
 import Unfollow from "./Unfollow";
 const jwt = require("jsonwebtoken");
 
-function Profile({ history }, props) {
+function Profile(props) {
   let { path, url } = useRouteMatch();
   const [profile, setProfile] = useState([]);
   const [following, setFollowing] = useState();
@@ -43,7 +43,7 @@ function Profile({ history }, props) {
     }
 
     if (!userExists) {
-      history.push(`${decodedjwt.username}`);
+      props.history.push(`${decodedjwt.username}`);
     }
 
     let response = await fetch("/api/profile/getProfileData", {
