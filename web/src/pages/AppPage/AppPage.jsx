@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import TopNav from "../../components/AppPage/TopNav/TopNav";
 import SideNav from "../../components/AppPage/SideNav/SideNav";
+import Social from "./Social/Social";
+import Store from "./Store/Store";
 import Apps from "./Apps/Apps";
 import ToDo from "./../../modules/ToDo/ToDo";
 import Error404 from "./../ErrorPage/Error404";
@@ -42,11 +44,13 @@ function AppPage() {
         </Route>
         <Route path="/social">
           <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
-            Social
+            <Social />
           </div>
         </Route>
         <Route path="/store">
-          <div className={isSidebarOpen ? "main" : "mainSideClosed"}>Store</div>
+          <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
+            <Store />
+          </div>
         </Route>
         <Route path="/search">
           <div className={isSidebarOpen ? "main" : "mainSideClosed"}>

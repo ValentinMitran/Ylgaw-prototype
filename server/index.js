@@ -9,7 +9,8 @@ const authRoute = require("./routes/auth");
 const timeMachineRoute = require("./routes/timeMachine");
 const todoRoute = require("./routes/todo");
 const walletRoute = require("./routes/wallet");
-const profileRoute = require('./routes/profile');
+const profileRoute = require("./routes/profile");
+const storeRoute = require("./routes/store");
 
 //Connect to DB
 mongoose.connect(
@@ -26,6 +27,7 @@ app.use("/api/user", authRoute);
 app.use("/api/timeMachine", timeMachineRoute);
 app.use("/api/todo", todoRoute);
 app.use("/api/wallet", walletRoute);
-app.use("/api/profile",profileRoute);
+app.use("/api/profile", profileRoute);
+app.use("/api/store", storeRoute);
 
 app.listen(process.env.PORT || 3001, () => console.log("Express running"));
