@@ -33,7 +33,10 @@ const upload = multer({
       var filename = file.originalname;
       var fileExtension = filename.split(".")[1];
       var date = req.body["date"] + req.body["month"] + req.body["year"];
-      cb(null, req.body["username"] + "/" + date + "." + fileExtension);
+      cb(
+        null,
+        req.body["username"] + "/timemachine/" + date + "." + fileExtension
+      );
     }
   })
 });

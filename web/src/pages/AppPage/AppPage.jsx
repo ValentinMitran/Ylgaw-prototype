@@ -12,6 +12,7 @@ import NapChart from "./../../modules/NapChart/NapChart";
 import Profile from "./Profile/Profile";
 import Wallet from "./Wallet/Wallet";
 import Pomodoro from "./../../modules/Pomodoro/Pomodoro";
+import Settings from './Settings/Settings';
 import "./AppPage.scss";
 const jwt = require("jsonwebtoken");
 function AppPage() {
@@ -59,7 +60,7 @@ function AppPage() {
         </Route>
         <Route path="/settings">
           <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
-            Settings
+            <Settings/>
           </div>
         </Route>
         <Route path="/notifications">

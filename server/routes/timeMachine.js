@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const Note = require("../models/timemachine/Note");
 
-const upload = require("./../utils/file-upload");
+const upload = require("./../utils/uploads/timemachine");
 const singleUpload = upload.single("daily");
 
 const aws = require("aws-sdk");
@@ -38,7 +38,7 @@ router.post("/get", verifyToken, async (req, res) => {
     req.body.date.toString() +
     req.body.month.toString() +
     req.body.year.toString();
-  const image = `${decoded.username}/${date}.png`;
+  const image = `${decoded.username}/timemachine/${date}.png`;
   const note = await Note.findOne({ username: decoded.username, date: date });
   var params = {
     Bucket: "ylgaw",
@@ -64,7 +64,7 @@ router.post("/remove", verifyToken, (req, res) => {
     req.body.date.toString() +
     req.body.month.toString() +
     req.body.year.toString();
-  const image = `${decoded.username}/${date}.png`;
+  const image = `${decoded.username}/timemachine/${date}.png`;
 
   var params = {
     Bucket: "ylgaw",

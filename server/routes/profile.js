@@ -5,6 +5,51 @@ const User = require("../models/User");
 const Followed = require("../models/Follows/Followed");
 const Following = require("../models/Follows/Following");
 
+const upload = require("./../utils/uploads/profile");
+const singleUpload = upload.single("pfp");
+
+const aws = require("aws-sdk");
+
+const dotenv = require("dotenv");
+dotenv.config();
+
+aws.config.update({
+  secretAccessKey: process.env.AWS_SECRET_ACCESS,
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  region: process.env.AWS_REGION
+});
+
+router.post("/pfp", verifyToken, function(req, res) {
+  singleUpload(req, res, function(err) {
+    if (err) {
+      return res.status(422).send({
+        errors: [{ title: "File Upload Error", detail: err.message }]
+      });
+    }
+
+    return res.json({ imageUrl: req.file.location });
+  });
+});
+
+router.post("/getPfp", verifyToken, function(req, res) {
+  const s3 = new aws.S3();
+  const image = `${req.body.username}/pfp.png`;
+  var params = {
+    Bucket: "ylgaw",
+    Key: image
+  };
+  s3.getObject(params, function(error, data) {
+    if (error != null) {
+      console.log("Failed to retrieve an object: " + error);
+      res.send("false");
+    } else {
+      const img64 = Buffer.from(data.Body).toString("base64");
+      res.send({ img64 });
+      console.log("Loaded " + data.ContentLength + " bytes");
+    }
+  });
+});
+
 router.post("/verifyUserName", verifyToken, async (req, res) => {
   const username = req.body.username;
   const user = await User.findOne(
@@ -48,6 +93,7 @@ router.post("/getProfileData", verifyToken, async (req, res) => {
       }
     }
   }
+
   const profile = {
     _id: user._id,
     username: user.username,

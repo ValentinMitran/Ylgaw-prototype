@@ -27,6 +27,9 @@
   margin: 5px;
   overflow: hidden;
   background-color: rgb(228, 228, 228);
+  @media (max-width: 768px) {
+  width: calc(100% - 10px);
+  }
 }
 .listingCard .listingText {
   display: flex;
@@ -43,9 +46,5 @@
     margin: 5px;
     width: calc(100% - 10px);
     height: calc(100% - 10px);
-  }
-  .listingCard {
-    margin: 5px auto;
-    display: block;
   }
 }

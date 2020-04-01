@@ -3,6 +3,7 @@ import { Switch, Route, Link, useRouteMatch, Redirect } from "react-router-dom";
 import "./Store.scss";
 import NewAd from "./NewAd/NewAd";
 import MyAds from "./MyAds/MyAds";
+import Ad from "./Ad/Ad";
 import { MdAdd, MdList, MdKeyboardReturn } from "react-icons/md";
 const jwt = require("jsonwebtoken");
 
@@ -74,6 +75,14 @@ function Store() {
               </Link>
             </div>
             <MyAds />
+          </Route>
+          <Route path={`${path}/ad`}>
+            <div className="shopNavBtn">
+              <Link to={`${path}`}>
+                <MdKeyboardReturn />
+              </Link>
+            </div>
+            <Ad />
           </Route>
           <Route path={`${path}/*`}>
             <Redirect to={path} />
