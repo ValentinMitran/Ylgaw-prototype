@@ -19,16 +19,22 @@
   color: black;
   font-size: 25px;
 }
-
+.listings {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
 .listingCard {
   height: 260px;
-  width: 250px;
+  width: calc(33% - 10px);
   display: inline-block;
   margin: 5px;
   overflow: hidden;
   background-color: rgb(228, 228, 228);
   @media (max-width: 768px) {
-  width: calc(100% - 10px);
+    width: calc(100% - 10px);
   }
 }
 .listingCard .listingText {

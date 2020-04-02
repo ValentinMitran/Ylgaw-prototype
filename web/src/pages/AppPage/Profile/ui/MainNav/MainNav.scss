@@ -1,0 +1,6 @@
+.mainNav nav {
+  margin-top: 30px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}

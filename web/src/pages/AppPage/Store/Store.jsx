@@ -41,7 +41,7 @@ function Store() {
                 <MdList />
               </Link>
             </div>
-
+<div className="listings">
             {ads.map(ad => (
               <div key={ad._id} className="listingCard">
                 <img
@@ -51,7 +51,12 @@ function Store() {
                 />
                 <div className="listingText">
                   <span className="title">{ad.title}</span>
-                  <span className="description">{ad.description}</span>
+                  <span className="description">
+                    {ad.description
+                      .split(" ")
+                      .slice(0, 5)
+                      .join(" ")}
+                  </span>
                   <span className="price">Price: {ad.price}</span>
                   <span className="seller">
                     by: <Link to={`/u/${ad.username}`}>{ad.username}</Link>
@@ -59,7 +64,7 @@ function Store() {
                   <Link to={`${url}/ad/${ad._id}`}>View</Link>
                 </div>
               </div>
-            ))}
+            ))}</div>
           </Route>
           <Route path={`${path}/add`}>
             <div className="shopNavBtn">

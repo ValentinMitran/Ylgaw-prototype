@@ -1,12 +1,16 @@
 .adForm {
   background-color: rgb(170, 170, 170);
-  width: 300px;
+  width: 100%;
   text-align: center;
   margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 @media (max-width: 768px) {
   .adForm {
-    margin: 5px;
-    width: calc(100% - 10px);
-  }
+    margin: 10px 0;
+    width: 100%;
+    }
 }

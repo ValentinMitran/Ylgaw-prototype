@@ -45,7 +45,7 @@ function NewAd({ history }) {
           id="adTitle"
           onChange={e => setAdTitle(e.target.value)}
         />
-        <br /> Description:
+        Description:
         <input
           required
           type="text"
@@ -54,12 +54,14 @@ function NewAd({ history }) {
           id="adDescription"
           onChange={e => setAdDescription(e.target.value)}
         />
-        <br /> Price:
+        Price:
         <input
           required
-          type="text"
+          min="1"
+          type="number"
           name="price"
           value={price}
+          pattern="[0-9]"
           id="price"
           onChange={e => setPrice(e.target.value)}
         />

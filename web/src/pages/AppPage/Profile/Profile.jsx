@@ -15,6 +15,9 @@ import Followers from "./Skeleton/Followers";
 import Shop from "./Skeleton/Shop";
 import Follow from "./Follow";
 import Unfollow from "./Unfollow";
+import MainNav from "./ui/MainNav/MainNav";
+import MobileNav from "./ui/MobileNav/MobileNav";
+import { useMediaQuery } from "react-responsive";
 const jwt = require("jsonwebtoken");
 
 function Profile(props) {
@@ -27,6 +30,7 @@ function Profile(props) {
     jwt.decode(localStorage.authToken)
   );
   let { username } = useParams();
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   async function getProfileData() {
     let userExists = false;
@@ -137,10 +141,7 @@ function Profile(props) {
               </Link>
             </div>
           </div>
-          <nav>
-            <Link to={`${url}/feed`}>Feed</Link>
-            <Link to={`${url}/shop`}>Shop</Link>
-          </nav>
+          {isMobile ? <MobileNav url={url} /> : <MainNav url={url} />}
         </div>
         <div className="profileMain">
           <Switch>
