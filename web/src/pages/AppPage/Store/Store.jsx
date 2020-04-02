@@ -56,13 +56,14 @@ function Store() {
                   <span className="seller">
                     by: <Link to={`/u/${ad.username}`}>{ad.username}</Link>
                   </span>
+                  <Link to={`${url}/ad/${ad._id}`}>View</Link>
                 </div>
               </div>
             ))}
           </Route>
           <Route path={`${path}/add`}>
             <div className="shopNavBtn">
-              <Link to={`${path}`}>
+              <Link to={`${url}`}>
                 <MdKeyboardReturn />
               </Link>
             </div>
@@ -70,15 +71,15 @@ function Store() {
           </Route>
           <Route path={`${path}/myads`}>
             <div className="shopNavBtn">
-              <Link to={`${path}`}>
+              <Link to={`${url}`}>
                 <MdKeyboardReturn />
               </Link>
             </div>
             <MyAds />
           </Route>
-          <Route path={`${path}/ad`}>
+          <Route path={`${path}/ad/:adId`}>
             <div className="shopNavBtn">
-              <Link to={`${path}`}>
+              <Link to={`${url}`}>
                 <MdKeyboardReturn />
               </Link>
             </div>

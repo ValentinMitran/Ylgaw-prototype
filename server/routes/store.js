@@ -6,6 +6,12 @@ const Ad = require("./../models/Store/Ads");
 const dotenv = require("dotenv");
 dotenv.config();
 
+router.post("/getAd", verifyToken, async (req, res) => {
+  const ads = await Ad.findOne({ _id: req.body.adId });
+
+  res.send(ads);
+});
+
 router.get("/ads", verifyToken, async (req, res) => {
   const ads = await Ad.find({}, {});
   res.send(ads);
