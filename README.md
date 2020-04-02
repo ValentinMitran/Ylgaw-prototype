@@ -1,4 +1,3 @@
-
 <h1 align="center">
   <br>
   <img src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png" alt="Ylgaw">
@@ -17,14 +16,15 @@
 
 ## Key Features
 
-* Time Machine (Diary)
-* Wallet System (Stripe Integration)
+- Time Machine (Diary)
+- Wallet System (Stripe Integration)
+- Marketplace
+- Time Management Tools && many more...
 
 ## TO DO
 
-* Ad Posting System
-* Chat
-* More...
+- Chat
+- More...
 
 ## License
 
@@ -35,4 +35,3 @@ MIT
 > [ValentinMitran.com](https://www.ValentinMitran.com) &nbsp;&middot;&nbsp;
 > GitHub [@ValentinMitran](https://github.com/ValentinMitran) &nbsp;&middot;&nbsp;
 > LinkedIn [/in/ValentinMitran](https://www.linkedin.com/in/ValentinMitran)
-
