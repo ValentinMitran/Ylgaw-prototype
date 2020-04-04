@@ -1,0 +1,195 @@
+body {
+  overflow-x: hidden;
+}
+.lp {
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+}
+header {
+  box-shadow: 0px 0px 5px 0px rgba(168, 168, 168, 0.75);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(168, 168, 168, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(168, 168, 168, 0.75);
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  .lpnav {
+    max-width: 1100px;
+    height: 50px;
+    margin: auto;
+    display: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    img {
+      padding-left: 15px;
+      height: 30px;
+      width: 120px;
+    }
+    nav {
+      height: 50px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-content: center;
+      position: absolute;
+      right: 15px;
+
+      a {
+        padding: 0 10px;
+        line-height: 50px;
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+          background-color: rgb(240, 240, 240);
+          border-bottom: 2px solid #c20202;
+        }
+      }
+      #registerLink {
+        color: #c20202;
+      }
+    }
+  }
+}
+
+.lpcontainer {
+  width: 1100px;
+  margin: auto;
+  overflow: hidden;
+}
+.herotxt {
+  max-width: 600px;
+  margin: 450px auto;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  color: rgb(199, 96, 96);
+  @media (max-width: 768px) {
+    margin: 90px auto;
+  }
+  @media (min-width: 768px) and (max-width: 979px) {
+    margin: 220px auto;
+  }
+  p {
+    font-size: 60px;
+    font-weight: 1000;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    span {
+      margin: auto;
+    }
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+
+    @media (min-width: 768px) and (max-width: 979px) {
+      font-size: 40px;
+    }
+  }
+  a {
+    text-decoration: none;
+    text-align: center;
+    margin: 16px auto;
+    background-color: #c20202;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 10px;
+    color: white;
+    width: 140px;
+    @media (max-width: 768px) {
+      width: 90px;
+      font-size: 14px;
+    }
+    @media (min-width: 768px) and (max-width: 979px) {
+      width: 100px;
+      font-size: 14px;
+    }
+  }
+}
+.hero {
+  img {
+    width: 100vw;
+    display: block;
+    margin: auto;
+    height: auto;
+  }
+}
+.stats {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  background: #ed213a;
+  background: -webkit-linear-gradient(to right, #93291e, #ed213a);
+  background: linear-gradient(to right, #93291e, #ed213a);
+  margin: auto;
+  .stat {
+    height: 80px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 0 20px;
+    svg {
+      margin: auto;
+      font-size: 100px;
+    }
+    span {
+      font-size: 20px;
+      font-weight: 500;
+    }
+    font-size: 16px;
+  }
+}
+.modules {
+  max-width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  @media (max-width: 768px) {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: 100vw;
+  }
+  @media (min-width: 768px) and (max-width: 979px) {
+    width: 100vw;
+  }
+  .module {
+    width: 25%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    img {
+      align-self: center;
+      width: 80px;
+    }
+    span {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      width: 80%;
+    }
+    @media (min-width: 768px) and (max-width: 979px) {
+      width: 30%;
+    }
+  }
+}

@@ -6,7 +6,7 @@ function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const [loginError,setLoginError] = useState(false);
+  const [loginError, setLoginError] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,7 +38,6 @@ function LoginPage() {
       setUsername("");
       setPassword("");
     }
-
   };
 
   if (isLoading) {
@@ -56,13 +55,10 @@ function LoginPage() {
 
       <div className="auth-wrapper">
         <div className="auth-form">
-          <img
-            alt=""
-            src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
-          />
+          <img alt="" src="https://i.imgur.com/JD1htQS.png" />
           <div>{loginError}</div>
           <form onSubmit={submitForm}>
-          Username:
+            Username:
             <input
               type="text"
               name="username"
@@ -84,10 +80,6 @@ function LoginPage() {
           </form>
         </div>
       </div>
-
-
-
-
     </>
   );
 }

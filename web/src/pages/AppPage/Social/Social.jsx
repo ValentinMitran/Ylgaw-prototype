@@ -53,6 +53,16 @@ function Social() {
 
   return (
     <div>
+      <div className="userSearch">
+        <input
+          type="text"
+          name=""
+          id=""
+          placeholder="Search..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
+      </div>
       {users.map(user => (
         <div key={user._id} className="socialCard">
           <img

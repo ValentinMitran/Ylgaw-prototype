@@ -10,6 +10,7 @@ const jwt = require("jsonwebtoken");
 function Store() {
   let { path, url } = useRouteMatch();
   const [ads, setAds] = useState([]);
+  const [search, setSearch] = useState("");
 
   async function fetchAds() {
     let response = await fetch("/api/store/ads", {
@@ -30,9 +31,9 @@ function Store() {
   return (
     <>
       <div className="shopWrapper">
-        <div className="shopTitle">Baazar</div>
         <Switch>
           <Route exact path={path}>
+            <div className="shopTitle">Baazar</div>
             <div className="shopNavBtn">
               <Link to={`${path}/add`}>
                 <MdAdd />
@@ -41,32 +42,47 @@ function Store() {
                 <MdList />
               </Link>
             </div>
-<div className="listings">
-            {ads.map(ad => (
-              <div key={ad._id} className="listingCard">
-                <img
-                  className="profilePicture"
-                  src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
-                  alt=""
-                />
-                <div className="listingText">
-                  <span className="title">{ad.title}</span>
-                  <span className="description">
-                    {ad.description
-                      .split(" ")
-                      .slice(0, 5)
-                      .join(" ")}
-                  </span>
-                  <span className="price">Price: {ad.price}</span>
-                  <span className="seller">
-                    by: <Link to={`/u/${ad.username}`}>{ad.username}</Link>
-                  </span>
-                  <Link to={`${url}/ad/${ad._id}`}>View</Link>
+            <div className="adSearcher">
+              <input
+                id=""
+                type="text"
+                name="searchAds"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                id=""
+                placeholder="Search..."
+              />
+            </div>
+            <div className="listings">
+              {ads.map(ad => (
+                <div key={ad._id} className="listingCard">
+                  <img
+                    className="profilePicture"
+                    src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
+                    alt=""
+                  />
+                  <div className="listingText">
+                    <span className="title">
+                      {ad.title
+                        .split(" ")
+                        .slice(0, 7)
+                        .join(" ")}
+                    </span>
+                    <span className="price">Price: {ad.price}&euro;</span>
+                    <span className="seller">
+                      Sold by:{" "}
+                      <Link to={`/u/${ad.username}`}>{ad.username}</Link>
+                    </span>
+                    <Link id="viewAdButton" to={`${url}/ad/${ad._id}`}>
+                      View
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}</div>
+              ))}
+            </div>
           </Route>
           <Route path={`${path}/add`}>
+            <div className="shopTitle">Ad posting</div>
             <div className="shopNavBtn">
               <Link to={`${url}`}>
                 <MdKeyboardReturn />
@@ -75,6 +91,7 @@ function Store() {
             <NewAd />
           </Route>
           <Route path={`${path}/myads`}>
+            <div className="shopTitle">My Ads</div>
             <div className="shopNavBtn">
               <Link to={`${url}`}>
                 <MdKeyboardReturn />

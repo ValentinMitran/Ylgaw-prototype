@@ -55,10 +55,7 @@ function RegisterPage({ history }) {
       {isLoggedIn ? <Redirect to="/" /> : null}
       <div className="auth-wrapper">
         <div className="auth-form">
-          <img
-            alt=""
-            src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
-          />
+          <img alt="" src="https://i.imgur.com/JD1htQS.png" />
           <div>{registerError}</div>
           <form onSubmit={submitForm}>
             Username:

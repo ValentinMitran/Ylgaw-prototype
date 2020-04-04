@@ -36,12 +36,21 @@ function Ad() {
   }
   return (
     <>
+
+
+
       {error == true ? <Redirect to="/store" /> : null}
       {ad.title}
       <br />
       {ad.description} <br />
       {ad.price} <br />
       {ad.username}
+
+
+
+
+
+
     </>
   );
 }
