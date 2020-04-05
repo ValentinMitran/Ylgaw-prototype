@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-
+import { toast } from "react-toastify";
 function WritePost() {
   const [post, setPost] = useState("");
+  const notify = () => toast.success("Posted successfully!");
   const savePost = async (e) => {
     e.preventDefault();
     await fetch("/api/social/posts", {
@@ -17,6 +18,7 @@ function WritePost() {
       alert(err);
     });
     setPost("");
+    notify();
   };
   return (
     <>

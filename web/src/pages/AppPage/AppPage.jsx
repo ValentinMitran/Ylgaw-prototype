@@ -16,7 +16,10 @@ import Settings from "./Settings/Settings";
 import "./AppPage.scss";
 import { useMediaQuery } from "react-responsive";
 import Dashboard from "./Dashboard/Dashboard";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const jwt = require("jsonwebtoken");
+toast.configure();
 function AppPage() {
   const [decodedjwt, setDecodedjwt] = useState(
     jwt.decode(localStorage.authToken)
@@ -42,7 +45,7 @@ function AppPage() {
         </Route>
         <Route path="/home">
           <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
-           <Dashboard/>
+            <Dashboard />
           </div>
         </Route>
         <Route path="/social">

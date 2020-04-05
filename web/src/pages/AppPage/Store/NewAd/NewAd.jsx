@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import "./NewAd.scss";
+import { toast } from "react-toastify";
 const jwt = require("jsonwebtoken");
 
 function NewAd({ history }) {
@@ -8,25 +9,26 @@ function NewAd({ history }) {
   const [adDescription, setAdDescription] = useState("");
   const [price, setPrice] = useState("");
 
-  const submitForm = async e => {
+  const notify = () => toast.success("Ad posted successfully!");
+  const submitForm = async (e) => {
     e.preventDefault();
     let response = await fetch("/api/store/ads", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authToken: localStorage.authToken
+        authToken: localStorage.authToken,
       },
       body: JSON.stringify({
         title: adTitle,
         description: adDescription,
-        price: price
-      })
-    }).catch(err => {
+        price: price,
+      }),
+    }).catch((err) => {
       alert(err);
     });
     response = await response.text();
     if (response == "Success") {
-      alert(response);
+      notify();
       history.push(`myads`);
     }
   };
@@ -43,7 +45,7 @@ function NewAd({ history }) {
           name="adTitle"
           value={adTitle}
           id="adTitle"
-          onChange={e => setAdTitle(e.target.value)}
+          onChange={(e) => setAdTitle(e.target.value)}
         />
         Description:
         <input
@@ -52,7 +54,7 @@ function NewAd({ history }) {
           name="adDescription"
           value={adDescription}
           id="adDescription"
-          onChange={e => setAdDescription(e.target.value)}
+          onChange={(e) => setAdDescription(e.target.value)}
         />
         Price:
         <input
@@ -63,7 +65,7 @@ function NewAd({ history }) {
           value={price}
           pattern="[0-9]"
           id="price"
-          onChange={e => setPrice(e.target.value)}
+          onChange={(e) => setPrice(e.target.value)}
         />
         <button type="submit">Post Ad</button>
       </form>
