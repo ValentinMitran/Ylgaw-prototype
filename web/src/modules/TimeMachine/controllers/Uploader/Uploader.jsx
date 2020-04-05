@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import ActionContext from "../../ActionContext";
+import './Uploader.scss';
 
 function Uploader(props) {
   const [action, setAction] = useContext(ActionContext);
@@ -30,9 +31,10 @@ function Uploader(props) {
   useEffect(() => {}, [props.date]);
 
   return (
+    <div id="uploader">
     <form>
-      <input type="file" name="daily" id="" onChange={handleImageUpload} />
-    </form>
+      <input  type="file" name="daily" id="" onChange={handleImageUpload} />
+    </form></div>
   );
 }
 

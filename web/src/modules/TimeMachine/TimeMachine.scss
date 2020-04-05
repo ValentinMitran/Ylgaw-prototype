@@ -31,8 +31,8 @@
     display: block;
   }
   .notes {
-    display: relative;
-    width: 650px;
+    position: relative;
+    max-width: 650px;
     min-height: 200px;
     margin: auto;
     background-color: rgb(165, 165, 165);
@@ -44,14 +44,31 @@
     }
     textarea {
       width: 100%;
+      max-height: 400px;
       background-color: #b3b3b3;
       border: none;
+      resize: none;
+    }
+    button {
+      height: 40px;
+      width: 150px;
+      margin: auto;
+      border: none;
+      border-radius: 10px;
+      overflow: auto;
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      right: 0;
+      &:hover {
+        background-color: rgb(122, 122, 122);
+      }
     }
     svg {
-      position: fixed;
-      font-size: 20px;
-      margin-top: -20px;
-      right: 10px;
+      position: absolute;
+      font-size: 25px;
+      top: 0;
+      right: 0;
       cursor: pointer;
     }
   }

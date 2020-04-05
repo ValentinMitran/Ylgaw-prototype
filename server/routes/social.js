@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Followed = require("../models/Follows/Followed");
 const Following = require("../models/Follows/Following");
+const Post = require("../models/Social/Post");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -29,10 +30,29 @@ router.get("/usersList", verifyToken, async (req, res) => {
     processedList.push({
       _id: userList[i]._id,
       username: userList[i].username,
-      following: following
+      following: following,
     });
   }
   res.json(processedList);
 });
 
+router.get("/posts", verifyToken, async (req, res) => {
+  const posts = await Post.find({});
+  res.send(posts);
+});
+
+router.post("/posts", verifyToken, async (req, res) => {
+  const decoded = jwt.decode(req.header("authToken"));
+  const post = new Post({
+    username: decoded.username,
+    content: req.body.content,
+  });
+
+  try {
+    await post.save();
+    res.send("Success");
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
 module.exports = router;

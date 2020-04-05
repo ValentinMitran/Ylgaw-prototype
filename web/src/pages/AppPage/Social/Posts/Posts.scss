@@ -1,0 +1,39 @@
+.post {
+  width: 600px;
+  padding: 10px;
+  background-color: rgb(224, 224, 224);
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto 0;
+  .pheader {
+    padding: 0 10px;
+    display: flex;
+    align-content: center;
+    position: relative;
+  }
+  .pfp {
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+    }
+  }
+  .pfn {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    span {
+      font-size: 20px;
+    }
+    font-size: 14px;
+  }
+  .follow {
+    position: absolute;
+    right: 10px;
+    align-self: center;
+  }
+  .content {
+    padding: 10px 20px;
+  }
+}

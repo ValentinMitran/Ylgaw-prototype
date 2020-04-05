@@ -4,7 +4,13 @@ import "./MobileNav.scss";
 import { MdArrowForward, MdArrowBack } from "react-icons/md";
 
 function MobileNav({ history, url }) {
-  const [menu, setMenu] = useState(["Feed", "Shop", "Following", "Followers"]);
+  const [menu, setMenu] = useState([
+    "Feed",
+    "Shop",
+    "Following",
+    "Followers",
+    "Stats"
+  ]);
   const [currentPage, setCurrentPage] = useState(0);
   function menuChanger() {
     history.push(`${url}/${menu[currentPage]}`);
@@ -27,7 +33,9 @@ function MobileNav({ history, url }) {
         <div
           className="forward"
           onClick={() =>
-            currentPage != 3 ? setCurrentPage(currentPage + 1) : null
+            currentPage != menu.length - 1
+              ? setCurrentPage(currentPage + 1)
+              : null
           }
         >
           <MdArrowForward />

@@ -6,7 +6,7 @@ function NapChart(props) {
     <>
       <div className={props.isSidebarOpen ? "main" : "mainSideClosed"}>
         NapChart
-        </div>
+      </div>
     </>
   );
 }

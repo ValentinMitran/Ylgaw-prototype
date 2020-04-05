@@ -5,49 +5,49 @@
   background: -webkit-linear-gradient(to right, #240b36, #c31432);
   background: linear-gradient(to right, #240b36, #c31432);
   overflow: hidden;
-}
 
-.auth-form {
-  width: 320px;
-  height: 405px;
-  padding: 50px 40px 40px;
-  background: white;
-  margin: auto;
-  margin-top: 150px;
-  display: block;
-  border-radius: 7px;
-}
-.auth-form img {
-  width: 150px;
-  height: 150px;
-  margin: auto;
-  display: block;
-  padding-bottom: 20px;
-}
+  .auth-form {
+    width: 320px;
+    padding: 50px 40px 40px;
+    background: white;
+    margin: auto;
+    margin-top: 150px;
+    display: block;
+    border-radius: 7px;
 
-.auth-form input {
-  width: 100%;
-  height: 20px;
-  display: block;
-  box-sizing: border-box;
-  margin-bottom: 6px;
-}
-.auth-form button[type="submit"] {
-  width: 100%;
-  height: 40px;
-  margin-top: 20px;
-  background: #c94b4b;
-  background: -webkit-linear-gradient(to right, #4b134f, #c94b4b);
-  background: linear-gradient(to right, #4b134f, #c94b4b);
-  display: block;
-  border-style: hidden;
-  color: white;
-}
-.auth-form a {
-  text-decoration: none;
-  color: black;
-  font-weight: 800;
-}
-.auth-form a:hover {
-  color: #00577c;
+    img {
+      width: 150px;
+      height: 150px;
+      margin: auto;
+      display: block;
+      padding-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      height: 20px;
+      display: block;
+      box-sizing: border-box;
+      margin-bottom: 6px;
+    }
+    button[type="submit"] {
+      width: 100%;
+      height: 40px;
+      margin-top: 20px;
+      background: #c94b4b;
+      background: -webkit-linear-gradient(to right, #4b134f, #c94b4b);
+      background: linear-gradient(to right, #4b134f, #c94b4b);
+      display: block;
+      border-style: hidden;
+      color: white;
+    }
+    a {
+      text-decoration: none;
+      color: black;
+      font-weight: 800;
+      &:hover {
+        color: #c20202;
+      }
+    }
+  }
 }

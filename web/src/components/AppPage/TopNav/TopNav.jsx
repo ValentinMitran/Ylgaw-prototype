@@ -21,10 +21,7 @@ function TopNav(props) {
           ) : (
             <MdMenu onClick={() => props.setIsSidebarOpen(true)} />
           )}
-          <img
-            src="https://raw.githubusercontent.com/ValentinMitran/ylgaw/master/Ylgaw.png"
-            alt="Ylgaw"
-          />
+          <img src="https://i.imgur.com/JD1htQS.png" alt="Ylgaw" />
         </div>
 
         <div className="userArea">

@@ -13,6 +13,7 @@ import Feed from "./Skeleton/Feed";
 import Following from "./Skeleton/Following";
 import Followers from "./Skeleton/Followers";
 import Shop from "./Skeleton/Shop";
+import Stats from "./Skeleton/Stats";
 import Follow from "./Follow";
 import Unfollow from "./Unfollow";
 import MainNav from "./ui/MainNav/MainNav";
@@ -150,6 +151,9 @@ function Profile(props) {
             </Route>
             <Route path={`${path}/shop`}>
               <Shop />
+            </Route>
+            <Route path={`${path}/stats`}>
+              <Stats />
             </Route>
             <Route path={`${path}/followers`}>
               <Followers username={username} />

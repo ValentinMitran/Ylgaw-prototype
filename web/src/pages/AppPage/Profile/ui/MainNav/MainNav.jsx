@@ -8,6 +8,7 @@ function MainNav({ url }) {
         <nav>
           <Link to={`${url}/feed`}>Feed</Link>
           <Link to={`${url}/shop`}>Shop</Link>
+          <Link to={`${url}/stats`}>Stats</Link>
         </nav>
       </div>
     </>

@@ -100,6 +100,7 @@ function Store() {
             <MyAds />
           </Route>
           <Route path={`${path}/ad/:adId`}>
+          <div className="shopTitle">Ad Viewer</div>
             <div className="shopNavBtn">
               <Link to={`${url}`}>
                 <MdKeyboardReturn />
