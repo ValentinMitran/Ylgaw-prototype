@@ -15,6 +15,7 @@ import Pomodoro from "./../../modules/Pomodoro/Pomodoro";
 import Settings from "./Settings/Settings";
 import "./AppPage.scss";
 import { useMediaQuery } from "react-responsive";
+import Dashboard from "./Dashboard/Dashboard";
 const jwt = require("jsonwebtoken");
 function AppPage() {
   const [decodedjwt, setDecodedjwt] = useState(
@@ -41,7 +42,7 @@ function AppPage() {
         </Route>
         <Route path="/home">
           <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
-            HOME PAGE
+           <Dashboard/>
           </div>
         </Route>
         <Route path="/social">

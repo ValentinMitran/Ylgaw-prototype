@@ -38,6 +38,12 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+    @media (min-width: 768px) and (max-width: 979px) {
+      width: 100%;
+    }
   }
   .listingCard {
     display: inline-block;
@@ -45,17 +51,21 @@
     overflow: hidden;
     background-color: rgb(228, 228, 228);
     @media (max-width: 768px) {
-      width: calc(100% - 10px);
+      width: 80%;
     }
-
+    @media (min-width: 768px) and (max-width: 979px) {
+      width: 48%;
+    }
     .listingText {
       display: flex;
       flex-direction: column;
       text-align: center;
       box-sizing: border-box;
     }
-    .profilePicture {
+    .listingPicture {
       width: 250px;
+      margin: auto;
+      display: block;
     }
     .seller {
     }

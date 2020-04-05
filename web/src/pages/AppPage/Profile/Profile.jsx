@@ -6,7 +6,7 @@ import {
   Redirect,
   withRouter,
   useParams,
-  useRouteMatch
+  useRouteMatch,
 } from "react-router-dom";
 import "./Profile.scss";
 import Feed from "./Skeleton/Feed";
@@ -39,11 +39,11 @@ function Profile(props) {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        authToken: localStorage.authToken
+        authToken: localStorage.authToken,
       },
       body: JSON.stringify({
-        username: username
-      })
+        username: username,
+      }),
     });
     if (target.ok) {
       target = await target.json();
@@ -58,11 +58,11 @@ function Profile(props) {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        authToken: localStorage.authToken
+        authToken: localStorage.authToken,
       },
       body: JSON.stringify({
-        username: username
-      })
+        username: username,
+      }),
     });
     response = await response.json();
     setProfile(response);
@@ -76,11 +76,11 @@ function Profile(props) {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        authToken: localStorage.authToken
+        authToken: localStorage.authToken,
       },
       body: JSON.stringify({
-        username: username
-      })
+        username: username,
+      }),
     });
 
     response = await response.json();
@@ -147,13 +147,13 @@ function Profile(props) {
         <div className="profileMain">
           <Switch>
             <Route path={`${path}/feed`}>
-              <Feed />
+              <Feed username={username} />
             </Route>
             <Route path={`${path}/shop`}>
-              <Shop />
+              <Shop username={username} />
             </Route>
             <Route path={`${path}/stats`}>
-              <Stats />
+              <Stats username={username} />
             </Route>
             <Route path={`${path}/followers`}>
               <Followers username={username} />

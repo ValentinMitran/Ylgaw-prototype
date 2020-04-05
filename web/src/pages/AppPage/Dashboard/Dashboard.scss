@@ -1,0 +1,24 @@
+.postWriter {
+  background-color: rgb(218, 218, 218);
+  padding: 10px 20px;
+  width: 350px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  span {
+    font-size: 25px;
+    font-weight: 600;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    input {
+      margin: 0 25px;
+    }
+    button {
+      width: 150px;
+      margin: auto;
+    }
+  }
+}

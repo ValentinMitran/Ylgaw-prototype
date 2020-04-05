@@ -6,17 +6,19 @@ function Follow(props) {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        authToken: localStorage.authToken
+        authToken: localStorage.authToken,
       },
       body: JSON.stringify({
-        username: props.username
-      })
+        username: props.username,
+      }),
     });
     props.setFollowing(true);
   }
   return (
     <>
-      <button onClick={() => follow()}>Follow</button>
+      <button id="followAction" onClick={() => follow()}>
+        Follow
+      </button>
     </>
   );
 }

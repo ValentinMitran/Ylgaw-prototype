@@ -57,7 +57,7 @@ function Store() {
               {ads.map(ad => (
                 <div key={ad._id} className="listingCard">
                   <img
-                    className="profilePicture"
+                    className="listingPicture"
                     src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
                     alt=""
                   />

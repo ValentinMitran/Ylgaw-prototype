@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Followed = require("../models/Follows/Followed");
 const Following = require("../models/Follows/Following");
-
+const Post = require("../models/Social/Post");
+const Ads = require("../models/Store/Ads");
 const upload = require("./../utils/uploads/profile");
 const singleUpload = upload.single("pfp");
 
@@ -16,14 +17,14 @@ dotenv.config();
 aws.config.update({
   secretAccessKey: process.env.AWS_SECRET_ACCESS,
   accessKeyId: process.env.AWS_ACCESS_KEY,
-  region: process.env.AWS_REGION
+  region: process.env.AWS_REGION,
 });
 
-router.post("/pfp", verifyToken, function(req, res) {
-  singleUpload(req, res, function(err) {
+router.post("/pfp", verifyToken, function (req, res) {
+  singleUpload(req, res, function (err) {
     if (err) {
       return res.status(422).send({
-        errors: [{ title: "File Upload Error", detail: err.message }]
+        errors: [{ title: "File Upload Error", detail: err.message }],
       });
     }
 
@@ -31,14 +32,14 @@ router.post("/pfp", verifyToken, function(req, res) {
   });
 });
 
-router.post("/getPfp", verifyToken, function(req, res) {
+router.post("/getPfp", verifyToken, function (req, res) {
   const s3 = new aws.S3();
   const image = `${req.body.username}/pfp.png`;
   var params = {
     Bucket: "ylgaw",
-    Key: image
+    Key: image,
   };
-  s3.getObject(params, function(error, data) {
+  s3.getObject(params, function (error, data) {
     if (error != null) {
       console.log("Failed to retrieve an object: " + error);
       res.send("false");
@@ -73,11 +74,11 @@ router.post("/getProfileData", verifyToken, async (req, res) => {
   );
   const followers = await Followed.aggregate([
     { $match: { username: req.body.username } },
-    { $project: { _id: 0, qty: { $size: "$followed" } } }
+    { $project: { _id: 0, qty: { $size: "$followed" } } },
   ]);
   const followings = await Following.aggregate([
     { $match: { username: req.body.username } },
-    { $project: { _id: 0, qty: { $size: "$following" } } }
+    { $project: { _id: 0, qty: { $size: "$following" } } },
   ]);
 
   let self;
@@ -100,7 +101,7 @@ router.post("/getProfileData", verifyToken, async (req, res) => {
     title: user.title,
     followers: followers[0].qty,
     following: followings[0].qty,
-    self: self
+    self: self,
   };
   if (self == false && amFollowing == true) {
     profile.amFollowing = true;
@@ -165,6 +166,18 @@ router.post("/FollowersList", verifyToken, async (req, res) => {
   );
 
   res.send(list);
+});
+
+router.post("/feed", verifyToken, async (req, res) => {
+  let posts = await Post.find({ username: req.body.target });
+  res.send(posts);
+});
+router.post("/shop", verifyToken, async (req, res) => {
+  let listings = await Ads.find({ username: req.body.target });
+  res.send(listings);
+});
+router.post("/stats", verifyToken, async (req, res) => {
+  res.send("lol");
 });
 
 module.exports = router;
