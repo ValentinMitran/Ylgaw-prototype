@@ -3,26 +3,27 @@ import React, { useEffect, useState } from "react";
 function Shop({ username }) {
   const [listings, setListings] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  async function getListings() {
-    let response = await fetch("/api/profile/shop", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        authToken: localStorage.authToken,
-      },
-      body: JSON.stringify({
-        target: username,
-      }),
-    }).catch((err) => {
-      alert(err);
-    });
-    response = await response.json();
-    setListings(response);
-    setIsLoading(false);
-  }
+
   useEffect(() => {
+    async function getListings() {
+      let response = await fetch("/api/profile/shop", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          authToken: localStorage.authToken,
+        },
+        body: JSON.stringify({
+          target: username,
+        }),
+      }).catch((err) => {
+        alert(err);
+      });
+      response = await response.json();
+      setListings(response);
+      setIsLoading(false);
+    }
     getListings();
-  }, []);
+  }, [username]);
 
   if (isLoading) {
     return <>Loading...</>;

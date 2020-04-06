@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import "./NewAd.scss";
 import { toast } from "react-toastify";
-const jwt = require("jsonwebtoken");
 
 function NewAd({ history }) {
   const [adTitle, setAdTitle] = useState("");
@@ -27,7 +26,7 @@ function NewAd({ history }) {
       alert(err);
     });
     response = await response.text();
-    if (response == "Success") {
+    if (response === "Success") {
       notify();
       history.push(`myads`);
     }

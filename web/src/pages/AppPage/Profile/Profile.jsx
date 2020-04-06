@@ -27,74 +27,71 @@ function Profile(props) {
   const [pfp, setPfp] = useState("");
   const [following, setFollowing] = useState();
   const [loading, setLoading] = useState(false);
-  const [decodedjwt, setDecodedjwt] = useState(
-    jwt.decode(localStorage.authToken)
-  );
+  const [decodedjwt] = useState(jwt.decode(localStorage.authToken));
   let { username } = useParams();
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
-  async function getProfileData() {
-    let userExists = false;
-    let target = await fetch("/api/profile/verifyUserName", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        authToken: localStorage.authToken,
-      },
-      body: JSON.stringify({
-        username: username,
-      }),
-    });
-    if (target.ok) {
-      target = await target.json();
-      userExists = true;
-    }
-
-    if (userExists == false) {
-      props.history.push(`${decodedjwt.username}`);
-    }
-
-    let response = await fetch("/api/profile/getProfileData", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        authToken: localStorage.authToken,
-      },
-      body: JSON.stringify({
-        username: username,
-      }),
-    });
-    response = await response.json();
-    setProfile(response);
-    setFollowing(response.amFollowing);
-    console.log(response);
-    setLoading(false);
-  }
-
-  async function getPfp() {
-    let response = await fetch("/api/profile/getPfp", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        authToken: localStorage.authToken,
-      },
-      body: JSON.stringify({
-        username: username,
-      }),
-    });
-
-    response = await response.json();
-    if (response != false) {
-      setPfp(response.img64);
-    } else {
-      setPfp(false);
-    }
-  }
-
   useEffect(() => {
+    async function getProfileData() {
+      let userExists = false;
+      let target = await fetch("/api/profile/verifyUserName", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          authToken: localStorage.authToken,
+        },
+        body: JSON.stringify({
+          username: username,
+        }),
+      });
+      if (target.ok) {
+        target = await target.json();
+        userExists = true;
+      }
+
+      if (userExists === false) {
+        props.history.push(`${decodedjwt.username}`);
+      }
+
+      let response = await fetch("/api/profile/getProfileData", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          authToken: localStorage.authToken,
+        },
+        body: JSON.stringify({
+          username: username,
+        }),
+      });
+      response = await response.json();
+      setProfile(response);
+      setFollowing(response.amFollowing);
+      console.log(response);
+      setLoading(false);
+    }
+
+    async function getPfp() {
+      let response = await fetch("/api/profile/getPfp", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          authToken: localStorage.authToken,
+        },
+        body: JSON.stringify({
+          username: username,
+        }),
+      });
+
+      response = await response.json();
+      if (response !== false) {
+        setPfp(response.img64);
+      } else {
+        setPfp(false);
+      }
+    }
     getPfp();
     getProfileData();
-  }, [username, following]);
+  }, [username, following, decodedjwt, props.history]);
 
   if (loading) {
     return (

@@ -6,22 +6,21 @@ function Notes(props) {
   const [note, setNote] = useState(props.text);
   useEffect(() => {}, []);
 
-  const submitHandler = async e => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    let response = await fetch("/api/timeMachine/note/update", {
+    await fetch("/api/timeMachine/note/update", {
       method: "Post",
       headers: {
         "Content-Type": "application/json",
-        authToken: localStorage.authToken
+        authToken: localStorage.authToken,
       },
       body: JSON.stringify({
         text: note,
-        date: props.date
-      })
-    }).catch(err => {
+        date: props.date,
+      }),
+    }).catch((err) => {
       alert(err);
     });
-    response = await response.text();
     setEditMode(false);
   };
 
@@ -33,7 +32,7 @@ function Notes(props) {
             <textarea
               rows="4"
               cols="50"
-              onChange={e => setNote(e.target.value)}
+              onChange={(e) => setNote(e.target.value)}
             >
               {note}
             </textarea>

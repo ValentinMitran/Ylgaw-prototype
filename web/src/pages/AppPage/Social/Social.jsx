@@ -1,25 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Social.scss";
 import Posts from "./Posts/Posts";
-const jwt = require("jsonwebtoken");
 
 function Social() {
   const [search, setSearch] = useState("");
-  const [users, setUsers] = useState([]);
-  const [updated, setUpdated] = useState(false);
-  async function fetchUsers() {
-    let response = await fetch("/api/social/usersList", {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        authToken: localStorage.authToken,
-      },
-    });
-    response = await response.json();
-    setUsers(response);
-  }
-
-  async function follow(targetUsername) {
+  /*   const [updated, setUpdated] = useState(false);
+   */
+  /* async function follow(targetUsername) {
     await fetch("/api/profile/follow", {
       method: "post",
       headers: {
@@ -46,11 +33,9 @@ function Social() {
       }),
     });
     setUpdated(!updated);
-  }
+  } */
 
-  useEffect(() => {
-    fetchUsers();
-  }, [updated]);
+  useEffect(() => {}, []);
 
   return (
     <div>

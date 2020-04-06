@@ -4,6 +4,7 @@ import Remover from "./controllers/Remover/Remover";
 import "./TimeMachine.scss";
 import ActionContext from "./ActionContext";
 import Notes from "./Notes";
+import { useCallback } from "react";
 const jwt = require("jsonwebtoken");
 
 function TimeMachine(props) {
@@ -13,11 +14,12 @@ function TimeMachine(props) {
   const [note, setNote] = useState({});
   const [action, setAction] = useState(false);
   const [username, setUsername] = useState("");
-  function initiateDate() {
+
+  const initiateDate = useCallback(() => {
     let date = new Date();
     setDate(date);
     getPicture(date);
-  }
+  }, []);
 
   function nextDay() {
     let nextDay = new Date(date);
@@ -39,14 +41,14 @@ function TimeMachine(props) {
       method: "Post",
       headers: {
         "Content-Type": "application/json",
-        authToken: localStorage.authToken
+        authToken: localStorage.authToken,
       },
       body: JSON.stringify({
         date: date.getDate(),
         month: date.getMonth() + 1,
-        year: date.getFullYear()
-      })
-    }).catch(err => {
+        year: date.getFullYear(),
+      }),
+    }).catch((err) => {
       alert(err);
     });
     response = await response.json();
@@ -59,7 +61,7 @@ function TimeMachine(props) {
 
   useEffect(() => {
     initiateDate();
-  }, [action]);
+  }, [action, initiateDate]);
 
   if (isLoading) {
     return (

@@ -12,7 +12,8 @@
     background-color: #ffffff;
   }
 
-  nav a {
+  nav a,
+  #apps {
     text-decoration: none;
     color: black;
     text-align: center;
@@ -34,16 +35,22 @@
   }
 
   /* Change icon to text*/
-  nav a span,
-  nav a:hover svg {
+  nav span,
+  nav a:hover svg,
+  #apps:hover svg {
     display: none;
   }
-  nav a:hover span {
+  nav a:hover span,
+  #apps:hover span {
     display: block;
     background: rgb(247, 247, 247);
   }
 
   #apps {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    margin: auto;
     display: relative;
     &:hover .apps {
       display: flex;

@@ -1,30 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import "./MobileNav.scss";
 import { MdArrowForward, MdArrowBack } from "react-icons/md";
 
 function MobileNav({ history, url }) {
-  const [menu, setMenu] = useState([
-    "Feed",
-    "Shop",
-    "Following",
-    "Followers",
-    "Stats"
-  ]);
+  const [menu] = useState(["Feed", "Shop", "Following", "Followers", "Stats"]);
   const [currentPage, setCurrentPage] = useState(0);
-  function menuChanger() {
-    history.push(`${url}/${menu[currentPage]}`);
-  }
+
   useEffect(() => {
+    function menuChanger() {
+      history.push(`${url}/${menu[currentPage]}`);
+    }
     menuChanger();
-  }, [currentPage]);
+  }, [currentPage, history, menu, url]);
   return (
     <>
       <div className="mobileNav">
         <div
           className="back"
           onClick={() =>
-            currentPage != 0 ? setCurrentPage(currentPage - 1) : null
+            currentPage !== 0 ? setCurrentPage(currentPage - 1) : null
           }
         >
           <MdArrowBack />
@@ -33,7 +28,7 @@ function MobileNav({ history, url }) {
         <div
           className="forward"
           onClick={() =>
-            currentPage != menu.length - 1
+            currentPage !== menu.length - 1
               ? setCurrentPage(currentPage + 1)
               : null
           }

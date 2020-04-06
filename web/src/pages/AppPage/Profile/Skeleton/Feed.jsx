@@ -4,27 +4,26 @@ function Feed({ username }) {
   const [posts, setPosts] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
-  async function getPosts() {
-    let response = await fetch("/api/profile/feed", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        authToken: localStorage.authToken,
-      },
-      body: JSON.stringify({
-        target: username,
-      }),
-    }).catch((err) => {
-      alert(err);
-    });
-    response = await response.json();
-    setPosts(response);
-    setIsLoading(false);
-  }
-
   useEffect(() => {
+    async function getPosts() {
+      let response = await fetch("/api/profile/feed", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          authToken: localStorage.authToken,
+        },
+        body: JSON.stringify({
+          target: username,
+        }),
+      }).catch((err) => {
+        alert(err);
+      });
+      response = await response.json();
+      setPosts(response);
+      setIsLoading(false);
+    }
     getPosts();
-  }, []);
+  }, [username]);
 
   if (isLoading) {
     return <>Loading...</>;

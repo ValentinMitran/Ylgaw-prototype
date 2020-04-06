@@ -20,7 +20,7 @@ function SideNav() {
             <MdStore />
             <span>Store</span>
           </Link>
-          <Link id="apps">
+          <div id="apps">
             <MdApps />
             <span>Apps</span>
             <div className="apps">
@@ -29,7 +29,7 @@ function SideNav() {
               <Link to={`/pomodoro`}>Pomodoro</Link>
               <Link to={`/timemachine`}>Time Machine</Link>
             </div>
-          </Link>
+          </div>
 
           <Link id="logout" to={`/logout`}>
             <MdExitToApp />

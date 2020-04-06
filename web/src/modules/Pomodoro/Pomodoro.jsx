@@ -10,10 +10,6 @@ function Pomodoro(props) {
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
-  function toggle() {
-    setIsActive(!isActive);
-  }
-
   function reset() {
     setMinutes(session);
     setSeconds(0);
@@ -42,11 +38,15 @@ function Pomodoro(props) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive]);
+  }, [isActive, session, seconds]);
 
   return (
     <>
-      <div className={props.isSidebarOpen ? "main pomodoro" : "mainSideClosed pomodoro" }>
+      <div
+        className={
+          props.isSidebarOpen ? "main pomodoro" : "mainSideClosed pomodoro"
+        }
+      >
         <div className="timer">
           <p>Session</p>
           <span>

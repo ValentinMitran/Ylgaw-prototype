@@ -3,9 +3,7 @@ import { toast } from "react-toastify";
 const jwt = require("jsonwebtoken");
 
 function Uploader() {
-  const [decodedjwt, setDecodedjwt] = useState(
-    jwt.decode(localStorage.authToken)
-  );
+  const [decodedjwt] = useState(jwt.decode(localStorage.authToken));
   const notify = () => toast.success("Profile picture changed successfully!");
   const handleImageUpload = async (event) => {
     const files = event.target.files;
@@ -13,7 +11,7 @@ function Uploader() {
     formData.append("username", decodedjwt.username);
 
     formData.append("pfp", files[0]);
-    let response = await fetch("/api/profile/pfp", {
+    await fetch("/api/profile/pfp", {
       method: "POST",
       headers: {
         authToken: localStorage.authToken,
@@ -22,7 +20,6 @@ function Uploader() {
     }).catch((err) => {
       alert(err);
     });
-    response = await response.text();
     notify();
   };
 

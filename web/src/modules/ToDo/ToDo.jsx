@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./ToDo.scss";
 import { MdDelete } from "react-icons/md";
 
@@ -6,20 +6,20 @@ function ToDo(props) {
   const [todos, setTodos] = useState([
     { text: "Be a well known developer" },
     { text: "Get a Job" },
-    { text: "Advertise Ylgaw" }
+    { text: "Advertise Ylgaw" },
   ]);
   const [newTodo, setNewTodo] = useState("");
 
-  const addTodo = async e => {
+  const addTodo = async (e) => {
     e.preventDefault();
     if (!newTodo) {
       return;
     }
-    setTodos(todos => todos.concat({ text: newTodo }));
+    setTodos((todos) => todos.concat({ text: newTodo }));
     setNewTodo("");
   };
 
-  const removeTodo = index => {
+  const removeTodo = (index) => {
     const newTodos = [...todos];
     newTodos.splice(index, 1);
     setTodos(newTodos);
@@ -27,7 +27,7 @@ function ToDo(props) {
 
   return (
     <div className={props.isSidebarOpen ? "main" : "mainSideClosed"}>
-    <div className="todoList">
+      <div className="todoList">
         {todos.map((todo, index) => (
           <div className="todo" key={index} index={index}>
             {todo.text}
@@ -39,7 +39,7 @@ function ToDo(props) {
             type="text"
             name="newTodo"
             value={newTodo}
-            onChange={e => setNewTodo(e.target.value)}
+            onChange={(e) => setNewTodo(e.target.value)}
           />
           <button type="submit">SUBMIT</button>
         </form>

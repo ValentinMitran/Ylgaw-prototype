@@ -21,9 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 const jwt = require("jsonwebtoken");
 toast.configure();
 function AppPage() {
-  const [decodedjwt, setDecodedjwt] = useState(
-    jwt.decode(localStorage.authToken)
-  );
+  const [decodedjwt] = useState(jwt.decode(localStorage.authToken));
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
@@ -31,7 +29,7 @@ function AppPage() {
     if (isMobile) {
       setIsSidebarOpen(false);
     }
-  }, []);
+  }, [isMobile]);
   return (
     <>
       <TopNav

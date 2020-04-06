@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 function Stats({ username }) {
-  const [stats, setStats] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  /*   const [stats, setStats] = useState();
+   */ const [isLoading, setIsLoading] = useState(true);
 
-  async function getStats() {
+  /*   async function getStats() {
     let response = await fetch("/api/profile/stats", {
       method: "post",
       headers: {
@@ -20,9 +20,11 @@ function Stats({ username }) {
     response = await response.json();
     setStats(response);
     setIsLoading(false);
-  }
+  } */
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   if (isLoading) {
     return <>Loading...</>;

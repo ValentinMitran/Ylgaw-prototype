@@ -7,10 +7,8 @@ import { BalanceContext } from "../../../utils/BalanceContext";
 import "./TopNav.scss";
 const jwt = require("jsonwebtoken");
 function TopNav(props) {
-  const [balance, setBalance] = useContext(BalanceContext);
-  const [decodedjwt, setDecodedjwt] = useState(
-    jwt.decode(localStorage.authToken)
-  );
+  const [balance] = useContext(BalanceContext);
+  const [decodedjwt] = useState(jwt.decode(localStorage.authToken));
 
   return (
     <>

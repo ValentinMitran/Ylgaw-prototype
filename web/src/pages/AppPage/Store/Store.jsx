@@ -5,7 +5,6 @@ import NewAd from "./NewAd/NewAd";
 import MyAds from "./MyAds/MyAds";
 import Ad from "./Ad/Ad";
 import { MdAdd, MdList, MdKeyboardReturn } from "react-icons/md";
-const jwt = require("jsonwebtoken");
 
 function Store() {
   let { path, url } = useRouteMatch();
@@ -17,8 +16,8 @@ function Store() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authToken: localStorage.authToken
-      }
+        authToken: localStorage.authToken,
+      },
     });
     response = await response.json();
     setAds(response);
@@ -48,13 +47,12 @@ function Store() {
                 type="text"
                 name="searchAds"
                 value={search}
-                onChange={e => setSearch(e.target.value)}
-                id=""
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search..."
               />
             </div>
             <div className="listings">
-              {ads.map(ad => (
+              {ads.map((ad) => (
                 <div key={ad._id} className="listingCard">
                   <img
                     className="listingPicture"
@@ -63,10 +61,7 @@ function Store() {
                   />
                   <div className="listingText">
                     <span className="title">
-                      {ad.title
-                        .split(" ")
-                        .slice(0, 7)
-                        .join(" ")}
+                      {ad.title.split(" ").slice(0, 7).join(" ")}
                     </span>
                     <span className="price">Price: {ad.price}&euro;</span>
                     <span className="seller">
@@ -100,7 +95,7 @@ function Store() {
             <MyAds />
           </Route>
           <Route path={`${path}/ad/:adId`}>
-          <div className="shopTitle">Ad Viewer</div>
+            <div className="shopTitle">Ad Viewer</div>
             <div className="shopNavBtn">
               <Link to={`${url}`}>
                 <MdKeyboardReturn />

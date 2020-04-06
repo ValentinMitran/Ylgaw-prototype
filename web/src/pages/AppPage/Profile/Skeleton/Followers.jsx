@@ -4,25 +4,24 @@ function Followers(props) {
   const [followersList, setFollowersList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function getProfileFeed() {
-    let response = await fetch("/api/profile/FollowersList", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        authToken: localStorage.authToken
-      },
-      body: JSON.stringify({
-        username: props.username
-      })
-    });
-    response = await response.json();
-    setFollowersList(response);
-    setLoading(false);
-  }
-
   useEffect(() => {
+    async function getProfileFeed() {
+      let response = await fetch("/api/profile/FollowersList", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          authToken: localStorage.authToken,
+        },
+        body: JSON.stringify({
+          username: props.username,
+        }),
+      });
+      response = await response.json();
+      setFollowersList(response);
+      setLoading(false);
+    }
     getProfileFeed();
-  }, []);
+  }, [props.username]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -31,7 +30,7 @@ function Followers(props) {
   return (
     <div>
       <h3>
-        {followersList.map(user => (
+        {followersList.map((user) => (
           <div key={user._id} className="feedCard">
             <span>{user.username}</span> <br />
           </div>

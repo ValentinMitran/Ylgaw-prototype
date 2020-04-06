@@ -7,14 +7,21 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 router.post("/getAd", verifyToken, async (req, res) => {
-  const ads = await Ad.findOne({ _id: req.body.adId });
-
-  res.send(ads);
+  try {
+    const ads = await Ad.findOne({ _id: req.body.adId });
+    res.send(ads);
+  } catch (err) {
+    res.status(404).send();
+  }
 });
 
 router.get("/ads", verifyToken, async (req, res) => {
-  const ads = await Ad.find({}, {});
-  res.send(ads);
+  try {
+    const ads = await Ad.find({}, {});
+    res.send(ads);
+  } catch (err) {
+    res.status(404).send();
+  }
 });
 
 router.post("/ads", verifyToken, async (req, res) => {
@@ -24,7 +31,7 @@ router.post("/ads", verifyToken, async (req, res) => {
     title: req.body.title,
     description: req.body.description,
     price: req.body.price,
-    username: decoded.username
+    username: decoded.username,
   });
 
   try {

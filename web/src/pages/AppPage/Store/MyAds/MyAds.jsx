@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./MyAds.scss";
-const jwt = require("jsonwebtoken");
 
 function MyAds() {
   const [myAds, setMyAds] = useState([]);
@@ -10,9 +9,9 @@ function MyAds() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authToken: localStorage.authToken
-      }
-    }).catch(err => {
+        authToken: localStorage.authToken,
+      },
+    }).catch((err) => {
       alert(err);
     });
     response = await response.json();
@@ -26,7 +25,7 @@ function MyAds() {
   return (
     <div>
       <div>MyAds</div>
-      {myAds.map(myAd => (
+      {myAds.map((myAd) => (
         <div key={myAd._id}>
           {myAd.title} | {myAd.description} | {myAd.price}&euro;
           <br />
