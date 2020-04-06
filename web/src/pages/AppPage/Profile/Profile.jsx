@@ -65,7 +65,6 @@ function Profile(props) {
       response = await response.json();
       setProfile(response);
       setFollowing(response.amFollowing);
-      console.log(response);
       setLoading(false);
     }
 

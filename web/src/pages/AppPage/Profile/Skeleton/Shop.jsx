@@ -31,7 +31,7 @@ function Shop({ username }) {
   return (
     <>
       {listings.map((listing) => (
-        <div key="listing._id">
+        <div key={listing._id}>
           {listing.title}
           <br />
           {listing.description}

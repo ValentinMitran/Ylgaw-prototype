@@ -31,7 +31,7 @@ function Feed({ username }) {
   return (
     <>
       {posts.map((post) => (
-        <div key="post._id">
+        <div key={post._id}>
           {post.username}
           <br />
           {post.content}
