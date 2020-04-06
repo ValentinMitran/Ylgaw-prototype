@@ -32,39 +32,6 @@ router.post("/pfp", verifyToken, function (req, res) {
   });
 });
 
-router.post("/getPfp", verifyToken, function (req, res) {
-  const s3 = new aws.S3();
-  const image = `${req.body.username}/pfp.png`;
-  var params = {
-    Bucket: "ylgaw",
-    Key: image,
-  };
-  s3.getObject(params, function (error, data) {
-    if (error != null) {
-      console.log("Failed to retrieve an object: " + error);
-      res.send("false");
-    } else {
-      const img64 = Buffer.from(data.Body).toString("base64");
-      res.send({ img64 });
-      console.log("Loaded " + data.ContentLength + " bytes");
-    }
-  });
-});
-
-router.post("/verifyUserName", verifyToken, async (req, res) => {
-  const username = req.body.username;
-  const user = await User.findOne(
-    { username: username },
-    { _id: 1, username: 1 }
-  );
-  if (user) {
-    return res.status(202).send(user);
-  }
-  if (!user) {
-    return res.status(400).send("User doesnt exist");
-  }
-});
-
 router.post("/getProfileData", verifyToken, async (req, res) => {
   const decoded = jwt.decode(req.header("authToken"));
 
@@ -95,8 +62,34 @@ router.post("/getProfileData", verifyToken, async (req, res) => {
     }
   }
 
+  const s3 = new aws.S3();
+  const image = `${req.body.username}/pfp.png`;
+  var params = {
+    Bucket: "ylgaw",
+    Key: image,
+  };
+
+  //move that function out and pass it params
+
+  async function getImage() {
+    return new Promise((resolve, reject) => {
+      s3.getObject(params, function (error, data) {
+        if (error) {
+          console.log("Failed to retrieve an object: " + error);
+          reject(error);
+        } else {
+          const img64 = Buffer.from(data.Body).toString("base64");
+          resolve(img64);
+          console.log("Loaded " + data.ContentLength + " bytes");
+        }
+      });
+    });
+  }
+  let img64 = await getImage().catch(() => {});
+
   const profile = {
     _id: user._id,
+    pfp: img64,
     username: user.username,
     title: user.title,
     followers: followers[0].qty,
@@ -110,6 +103,20 @@ router.post("/getProfileData", verifyToken, async (req, res) => {
   }
 
   res.status(200).send(profile);
+});
+
+router.post("/verifyUserName", verifyToken, async (req, res) => {
+  const username = req.body.username;
+  const user = await User.findOne(
+    { username: username },
+    { _id: 1, username: 1 }
+  );
+  if (user) {
+    return res.status(202).send(user);
+  }
+  if (!user) {
+    return res.status(400).send("User doesnt exist");
+  }
 });
 
 router.post("/follow", verifyToken, async (req, res) => {

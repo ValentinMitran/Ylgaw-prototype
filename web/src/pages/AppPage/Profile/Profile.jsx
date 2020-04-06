@@ -24,7 +24,6 @@ const jwt = require("jsonwebtoken");
 function Profile(props) {
   let { path, url } = useRouteMatch();
   const [profile, setProfile] = useState([]);
-  const [pfp, setPfp] = useState("");
   const [following, setFollowing] = useState();
   const [loading, setLoading] = useState(false);
   const [decodedjwt] = useState(jwt.decode(localStorage.authToken));
@@ -70,28 +69,8 @@ function Profile(props) {
       setLoading(false);
     }
 
-    async function getPfp() {
-      let response = await fetch("/api/profile/getPfp", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          authToken: localStorage.authToken,
-        },
-        body: JSON.stringify({
-          username: username,
-        }),
-      });
-
-      response = await response.json();
-      if (response !== false) {
-        setPfp(response.img64);
-      } else {
-        setPfp(false);
-      }
-    }
-    getPfp();
     getProfileData();
-  }, [username, following, decodedjwt, props.history]);
+  }, [username, decodedjwt, props.history]);
 
   if (loading) {
     return (
@@ -106,13 +85,13 @@ function Profile(props) {
       <div className="profileContainer">
         <div className="profileSide">
           <div className="profileData">
-            {!pfp ? (
+            {!profile.pfp ? (
               <img
                 src="https://www.awesomecreative.co.uk/wp-content/uploads/2018/07/placeholder-profile.jpg"
                 alt="Profile"
               />
             ) : (
-              <img src={`data:image/png;base64,${pfp}`} alt="Profile" />
+              <img src={`data:image/png;base64,${profile.pfp}`} alt="Profile" />
             )}
 
             <div className="profileName">

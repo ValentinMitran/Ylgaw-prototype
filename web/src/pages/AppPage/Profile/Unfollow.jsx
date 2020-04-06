@@ -6,18 +6,20 @@ function Unfollow(props) {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        authToken: localStorage.authToken
+        authToken: localStorage.authToken,
       },
       body: JSON.stringify({
-        username: props.username
-      })
+        username: props.username,
+      }),
     });
     props.setFollowing(false);
   }
 
   return (
     <>
-      <button onClick={() => unfollow()}>UnFollow</button>
+      <button id="followAction" onClick={() => unfollow()}>
+        UnFollow
+      </button>
     </>
   );
 }
