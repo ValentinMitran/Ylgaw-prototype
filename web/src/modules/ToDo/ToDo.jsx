@@ -4,9 +4,10 @@ import { MdDelete } from "react-icons/md";
 
 function ToDo(props) {
   const [todos, setTodos] = useState([
-    { text: "Be a well known developer" },
-    { text: "Get a Job" },
-    { text: "Advertise Ylgaw" },
+    { text: "This Module" },
+    { text: "Is still" },
+    { text: "In Development" },
+    { text: "But Welcome to YLGAW ANYWAYS!" },
   ]);
   const [newTodo, setNewTodo] = useState("");
 

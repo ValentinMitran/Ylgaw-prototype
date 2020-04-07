@@ -24,10 +24,14 @@ function Posts() {
         <div className="post" key={post._id}>
           <div className="pheader">
             <div className="pfp">
-              <img
-                src="https://images-na.ssl-images-amazon.com/images/M/MV5BMTU1MDM5NjczOF5BMl5BanBnXkFtZTcwOTY2MDE4OA@@._V1_UY256_CR0,0,172,256_AL_.jpg"
-                alt=""
-              />
+              {!post.pfp ? (
+                <img
+                  src="https://www.awesomecreative.co.uk/wp-content/uploads/2018/07/placeholder-profile.jpg"
+                  alt="Profile"
+                />
+              ) : (
+                <img src={`data:image/png;base64,${post.pfp}`} alt="Profile" />
+              )}
             </div>
 
             <div className="pfn">
