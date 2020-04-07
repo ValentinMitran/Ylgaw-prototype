@@ -4,37 +4,6 @@ import Posts from "./Posts/Posts";
 
 function Social() {
   const [search, setSearch] = useState("");
-  /*   const [updated, setUpdated] = useState(false);
-   */
-  /* async function follow(targetUsername) {
-    await fetch("/api/profile/follow", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        authToken: localStorage.authToken,
-      },
-      body: JSON.stringify({
-        username: targetUsername,
-      }),
-    });
-
-    setUpdated(!updated);
-  }
-
-  async function unfollow(targetUsername) {
-    await fetch("/api/profile/unfollow", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        authToken: localStorage.authToken,
-      },
-      body: JSON.stringify({
-        username: targetUsername,
-      }),
-    });
-    setUpdated(!updated);
-  } */
-
   useEffect(() => {}, []);
 
   return (

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import "./Posts.scss";
 import Follow from "./Follow";
 import Unfollow from "./Unfollow";
 
-function Posts() {
+function Posts({ history }) {
   const [posts, setPosts] = useState([]);
 
   async function getPosts() {
@@ -36,7 +37,10 @@ function Posts() {
               )}
             </div>
 
-            <div className="pfn">
+            <div
+              className="pfn"
+              onClick={() => history.push(`/u/${post.username}`)}
+            >
               <span>{post.username}</span>@{post.username}
             </div>
             <div className="follow">
@@ -66,4 +70,4 @@ function Posts() {
   );
 }
 
-export default Posts;
+export default withRouter(Posts);
