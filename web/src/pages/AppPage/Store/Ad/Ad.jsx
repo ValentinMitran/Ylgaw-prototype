@@ -41,11 +41,12 @@ function Ad() {
   return (
     <>
       {error === true ? <Redirect to="/store" /> : null}
-      {ad.title}
-      <br />
-      {ad.description} <br />
-      {ad.price} <br />
-      {ad.username}
+      <div className="ad">
+        <div className="title">{ad.title}</div>
+        <div className="description">{ad.description}</div>
+        <div className="price">{ad.price}&euro;</div>
+        <div className="username">{ad.username}</div>
+      </div>
     </>
   );
 }

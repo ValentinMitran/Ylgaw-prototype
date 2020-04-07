@@ -54,11 +54,6 @@ function Store() {
             <div className="listings">
               {ads.map((ad) => (
                 <div key={ad._id} className="listingCard">
-                  <img
-                    className="listingPicture"
-                    src="https://raw.githubusercontent.com/ValentinMitran/Ylgaw/master/Ylgaw.png"
-                    alt=""
-                  />
                   <div className="listingText">
                     <span className="title">
                       {ad.title.split(" ").slice(0, 7).join(" ")}

@@ -4,7 +4,14 @@ import "./MyAds.scss";
 function MyAds() {
   const [myAds, setMyAds] = useState([]);
 
-  async function fetchPosts() {
+  async function deleteAd(target) {
+    alert(`Deleting ${target}`);
+  }
+  async function editAd(target) {
+    alert("EDIT THIS AD MODAL BOX");
+  }
+
+  async function fetchListings() {
     let response = await fetch("/api/store/myads", {
       method: "GET",
       headers: {
@@ -19,15 +26,16 @@ function MyAds() {
   }
 
   useEffect(() => {
-    fetchPosts();
+    fetchListings();
   }, []);
 
   return (
     <div>
-      <div>MyAds</div>
       {myAds.map((myAd) => (
         <div key={myAd._id}>
-          {myAd.title} | {myAd.description} | {myAd.price}&euro;
+          {myAd.title} | {myAd.description} | {myAd.price}&euro;{" "}
+          <button onClick={() => editAd(myAd._id)}>Edit</button>
+          <button onClick={() => deleteAd(myAd._id)}>Delete</button>
           <br />
         </div>
       ))}
