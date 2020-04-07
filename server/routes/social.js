@@ -45,11 +45,16 @@ router.get("/usersList", verifyToken, async (req, res) => {
 });
 
 router.get("/posts", verifyToken, async (req, res) => {
+  const decoded = jwt.decode(req.header("authToken"));
   const s3 = new aws.S3();
   let data = [];
   let image;
   let params = {};
+  let self;
+  let amFollowing;
   const posts = await Post.find({});
+
+  let followingList = await Following.findOne({ username: decoded.username });
 
   async function getImage() {
     return new Promise((resolve, reject) => {
@@ -74,9 +79,28 @@ router.get("/posts", verifyToken, async (req, res) => {
         Key: image,
       };
       let img64 = await getImage().catch(() => {});
+      if (decoded.username === post.username) {
+        self = true;
+      } else {
+        self = false;
+        for (let i = 0; i < followingList.following.length; i++) {
+          if (followingList.following[i] === post.username) {
+            amFollowing = true;
+          } else {
+            amFollowing = false;
+          }
+        }
+      }
+      if (self == false && amFollowing == true) {
+        amFollowing = true;
+      } else if (self == false && amFollowing == false) {
+        amFollowing = false;
+      }
 
       data.push({
         pfp: img64,
+        self: self ? true : false,
+        amFollowing: amFollowing ? true : false,
         username: post.username,
         content: post.content,
       });

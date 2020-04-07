@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Posts.scss";
+import Follow from "./Follow";
+import Unfollow from "./Unfollow";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
@@ -20,8 +22,8 @@ function Posts() {
   }, []);
   return (
     <>
-      {posts.map((post) => (
-        <div className="post" key={post._id}>
+      {posts.map((post, index) => (
+        <div className="post" key={index}>
           <div className="pheader">
             <div className="pfp">
               {!post.pfp ? (
@@ -38,7 +40,23 @@ function Posts() {
               <span>{post.username}</span>@{post.username}
             </div>
             <div className="follow">
-              <button>{post.following ? "Unfollow" : "Follow"}</button>
+              {post.self === false ? (
+                post.amFollowing === true ? (
+                  <Unfollow
+                    index={index}
+                    posts={posts}
+                    setPosts={setPosts}
+                    username={post.username}
+                  />
+                ) : (
+                  <Follow
+                    index={index}
+                    posts={posts}
+                    setPosts={setPosts}
+                    username={post.username}
+                  />
+                )
+              ) : null}
             </div>
           </div>
           <div className="content">{post.content}</div>
