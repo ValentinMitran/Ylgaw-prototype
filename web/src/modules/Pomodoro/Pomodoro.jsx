@@ -1,93 +1,68 @@
-import React, { useState, useEffect } from "react";
-import { FaPause, FaPlay, FaPlus, FaMinus } from "react-icons/fa";
-import { GiBackwardTime } from "react-icons/gi";
+import React, { useState, useEffect, useRef } from "react";
 import "./Pomodoro.scss";
+import { useInterval } from "./hooks/useInterval";
 
-function Pomodoro(props) {
-  const [session, setSession] = useState(25);
-  const [breakTime, setBreakTime] = useState(5);
-  const [minutes, setMinutes] = useState(session);
-  const [seconds, setSeconds] = useState(0);
-  const [isActive, setIsActive] = useState(false);
+import TimeSet from "./components/TimeSet";
+import Timer from "./components/Timer";
+import Controls from "./components/Controls";
 
-  function reset() {
-    setMinutes(session);
-    setSeconds(0);
-    setIsActive(false);
-  }
-  function toggle() {
-    setMinutes(session);
-    setSeconds(0);
-    setIsActive(!isActive);
-  }
+import alarm from "./sounds/alarm.mp3";
+
+const Pomodoro = ({ isSidebarOpen }) => {
+  const [breakVal, setBreakVal] = useState(5);
+  const [sessionVal, setSessionVal] = useState(25);
+  const [mode, setMode] = useState("session");
+  const [time, setTime] = useState(sessionVal * 60 * 1000);
+  const [active, setActive] = useState(false);
+  const beep = useRef();
+
+  useInterval(() => setTime(time - 1000), active ? 1000 : null);
 
   useEffect(() => {
-    let interval = null;
-    if (isActive) {
-      let countDownDate = new Date();
-      countDownDate.setMinutes(countDownDate.getMinutes() + session);
-      countDownDate = countDownDate.getTime();
+    setTime(sessionVal * 60 * 1000);
+  }, [sessionVal]);
 
-      interval = setInterval(() => {
-        let now = new Date().getTime();
-        let distance = countDownDate - now;
-        setMinutes(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
-        setSeconds(Math.floor((distance % (1000 * 60)) / 1000));
-      }, 1000);
-    } else if (!isActive && seconds !== 0) {
-      clearInterval(interval);
+  useEffect(() => {
+    if (time === 0 && mode === "session") {
+      beep.current.play();
+      setMode("break");
+      setTime(breakVal * 60 * 1000);
+    } else if (time === 0 && mode === "break") {
+      beep.current.play();
+      setMode("session");
+      setTime(sessionVal * 60 * 1000);
     }
-    return () => clearInterval(interval);
-  }, [isActive, session, seconds]);
+  }, [time, breakVal, sessionVal, mode]);
+
+  const handleReset = () => {
+    beep.current.pause();
+    beep.current.currentTime = 0;
+    setActive(false);
+    setMode("session");
+    setBreakVal(5);
+    setSessionVal(25);
+    setTime(25 * 60 * 1000);
+  };
 
   return (
-    <>
-      <div
-        className={
-          props.isSidebarOpen ? "main pomodoro" : "mainSideClosed pomodoro"
-        }
-      >
-        <div className="timer">
-          <p>Session</p>
-          <span>
-            {isActive ? (
-              <>
-                {minutes}:{seconds}
-              </>
-            ) : (
-              session
-            )}
-          </span>
-          <div className="controllers">
-            {isActive ? (
-              <FaPause onClick={() => toggle()} />
-            ) : (
-              <FaPlay onClick={() => toggle()} />
-            )}
-            <GiBackwardTime onClick={() => reset()} />
-          </div>{" "}
+    <div className={isSidebarOpen ? "main" : "mainSideClosed"}>
+      <div className="container">
+        <div className="time-wrapper">
+          <Timer currentMode={[mode, setMode]} currentTime={[time, setTime]} />
+          <Controls
+            activeStatus={[active, setActive]}
+            handleReset={handleReset}
+          />
         </div>
-        <div className="settings">
-          <div className="session">
-            <p>Session</p>
-            <span>{session}</span>
-            <div className="controllers">
-              <FaPlus onClick={() => setSession(session + 1)} />
-              <FaMinus onClick={() => setSession(session - 1)} />
-            </div>
-          </div>
-          <div className="break ">
-            <p>Break</p>
-            <span>{breakTime}</span>{" "}
-            <div className="controllers">
-              <FaPlus onClick={() => setBreakTime(breakTime + 1)} />
-              <FaMinus onClick={() => setBreakTime(breakTime - 1)} />
-            </div>
-          </div>
+        <div className="timeset-wrapper">
+          <TimeSet type={"Session"} value={[sessionVal, setSessionVal]} />
+          <TimeSet type={"Break"} value={[breakVal, setBreakVal]} />
         </div>
+
+        <audio id="beep" src={alarm} ref={beep} />
       </div>
-    </>
+    </div>
   );
-}
+};
 
 export default Pomodoro;

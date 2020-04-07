@@ -1,67 +1,74 @@
-.pomodoro {
-  overflow: hidden;
-  span {
-    color: red;
-    font-size: 40px;
-    font-weight: 600;
-  }
-  svg {
-    background-color: #ffffff;
-    border: 2px solid rgb(110, 15, 15);
-    width: 30px;
-    height: 30px;
-    margin: 0 10px;
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap");
+.container {
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.time-wrapper {
+  background-color: #fafafa;
+  width: calc(100% - 60px);
+  margin: auto;
+  padding: 1rem;
+  box-shadow: 0 3px 6px #888888;
+  h2 {
+    text-align: right;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #7a7a7a;
   }
 
-  .timer {
-    width: 800px;
-    margin: auto;
+  h3 {
+    text-align: center;
+    font-size: 7rem;
+    color: steelblue;
+    font-weight: 400;
+  }
+}
+
+.controls-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  button {
+    font-size: 3rem;
+    display: block;
+    border: none;
+    background-color: transparent;
+    color: #7a7a7a;
+  }
+}
+
+.timeset-wrapper {
+  margin: auto;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  .control {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: rgb(192, 192, 192);
-    border: 1px solid #000000;
-    p {
-      font-size: 30px;
+    justify-content: center;
+    margin: 0 10px;
+    h2 {
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: #7a7a7a;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      text-align: center;
+      font-weight: 400;
+      font-size: 2rem;
+      color: #7a7a7a;
+    }
+
+    button {
+      border: none;
+      background-color: transparent;
+      color: steelblue;
+      font-size: 2rem;
       font-weight: 700;
     }
-    @media (max-width: 768px) {
-      width: calc(100% - 20px);
-      margin: 10px;
-    }
-  }
-  .settings {
-    width: 800px;
-    margin: auto;
-    display: flex;
-    p {
-      font-size: 20px;
-      font-weight: 600;
-    }
-    @media (max-width: 768px) {
-      width: calc(100% - 20px);
-      margin: 10px;
-    }
-  }
-
-  .session {
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgb(192, 192, 192);
-    border: 1px solid #000000;
-  }
-
-  .break {
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgb(192, 192, 192);
-    border: 1px solid #000000;
-  }
-  .controllers {
-    margin-top: 10px;
   }
 }
