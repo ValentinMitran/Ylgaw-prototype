@@ -26,7 +26,9 @@ function Following(props) {
   if (loading) {
     return <div>Loading...</div>;
   }
-
+  if (followingList.length < 1) {
+    return <>NOT FOLLOWING ANYONE</>;
+  }
   return (
     <div>
       <h3>

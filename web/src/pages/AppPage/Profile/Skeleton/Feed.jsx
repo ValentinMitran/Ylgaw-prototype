@@ -28,6 +28,9 @@ function Feed({ username }) {
   if (isLoading) {
     return <>Loading...</>;
   }
+  if (posts.length < 1) {
+    return <>NO POSTS</>;
+  }
   return (
     <>
       {posts.map((post) => (

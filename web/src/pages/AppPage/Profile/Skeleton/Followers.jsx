@@ -26,7 +26,9 @@ function Followers(props) {
   if (loading) {
     return <div>Loading...</div>;
   }
-
+  if (followersList.length < 1) {
+    return <>NO FOLLOWERS</>;
+  }
   return (
     <div>
       <h3>

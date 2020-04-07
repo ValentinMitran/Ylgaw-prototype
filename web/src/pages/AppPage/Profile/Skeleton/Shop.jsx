@@ -28,6 +28,9 @@ function Shop({ username }) {
   if (isLoading) {
     return <>Loading...</>;
   }
+  if (listings.length < 1) {
+    return <>NO LISTINGS</>;
+  }
   return (
     <>
       {listings.map((listing) => (

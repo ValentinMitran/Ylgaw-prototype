@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { withRouter } from "react-router-dom";
 const jwt = require("jsonwebtoken");
 
-function Uploader() {
+function Uploader({ history }) {
   const [decodedjwt] = useState(jwt.decode(localStorage.authToken));
   const notify = () => toast.success("Profile picture changed successfully!");
   const handleImageUpload = async (event) => {
@@ -21,6 +22,7 @@ function Uploader() {
       alert(err);
     });
     notify();
+    history.push(`/u/${decodedjwt.username}`);
   };
 
   useEffect(() => {}, []);
@@ -32,4 +34,4 @@ function Uploader() {
   );
 }
 
-export default Uploader;
+export default withRouter(Uploader);
