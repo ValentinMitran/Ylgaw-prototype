@@ -20,6 +20,35 @@ aws.config.update({
   region: process.env.AWS_REGION,
 });
 
+router.get("/pfp", verifyToken, async function (req, res) {
+  const decodedjwt = jwt.decode(req.header("authToken"));
+
+  const s3 = new aws.S3();
+  const image = `${decodedjwt.username}/pfp.png`;
+  var params = {
+    Bucket: "ylgaw",
+    Key: image,
+  };
+
+  async function getImage() {
+    return new Promise((resolve, reject) => {
+      s3.getObject(params, function (error, data) {
+        if (error) {
+          console.log("Failed to retrieve an object: " + error);
+          reject(error);
+        } else {
+          const img64 = Buffer.from(data.Body).toString("base64");
+          resolve(img64);
+          console.log("Loaded " + data.ContentLength + " bytes");
+        }
+      });
+    });
+  }
+  let img64 = await getImage().catch(() => {});
+
+  res.send(img64);
+});
+
 router.post("/pfp", verifyToken, function (req, res) {
   singleUpload(req, res, function (err) {
     if (err) {
