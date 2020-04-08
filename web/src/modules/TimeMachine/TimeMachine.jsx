@@ -8,7 +8,7 @@ import { useCallback } from "react";
 const jwt = require("jsonwebtoken");
 
 function TimeMachine(props) {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [src, setSrc] = useState("");
   const [note, setNote] = useState({});
@@ -60,8 +60,12 @@ function TimeMachine(props) {
   }
 
   useEffect(() => {
-    initiateDate();
-  }, [action, initiateDate]);
+    if (date == null) {
+      initiateDate();
+    } else {
+      getPicture(date);
+    }
+  }, [action, initiateDate, date]);
 
   if (isLoading) {
     return (

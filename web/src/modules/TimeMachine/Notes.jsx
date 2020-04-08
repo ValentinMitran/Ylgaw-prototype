@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { MdModeEdit } from "react-icons/md";
+import { toast } from "react-toastify";
 
 function Notes(props) {
   const [editMode, setEditMode] = useState(false);
   const [note, setNote] = useState(props.text);
+  const notify = () => toast.success("Note updated successfully!");
+
   useEffect(() => {}, []);
 
   const submitHandler = async (e) => {
@@ -21,6 +24,7 @@ function Notes(props) {
     }).catch((err) => {
       alert(err);
     });
+    notify();
     setEditMode(false);
   };
 
