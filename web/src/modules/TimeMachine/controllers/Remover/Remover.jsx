@@ -9,7 +9,7 @@ function Remover(props) {
   const notify = () => toast.success("Image removed successfully!");
 
   async function removeImg() {
-    let response = await fetch("/api/timeMachine/remove", {
+    await fetch("/api/timeMachine/remove", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +23,6 @@ function Remover(props) {
     }).catch((err) => {
       alert(err);
     });
-    response = await response.text();
     notify();
     setAction(!action);
   }

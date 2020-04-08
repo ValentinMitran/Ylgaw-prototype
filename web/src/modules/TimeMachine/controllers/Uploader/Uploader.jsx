@@ -16,7 +16,7 @@ function Uploader(props) {
     formData.append("year", props.year);
 
     formData.append("daily", files[0]);
-    let response = await fetch("/api/timeMachine/upload", {
+    await fetch("/api/timeMachine/upload", {
       method: "POST",
       headers: {
         authToken: localStorage.authToken,
@@ -25,7 +25,6 @@ function Uploader(props) {
     }).catch((err) => {
       alert(err);
     });
-    response = await response.text();
     notify();
     setAction(!action);
   };

@@ -1,52 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
+import TodoForm from "./TodoForm";
+import TodoList from "./TodoList";
+import useTodoState from "./useTodoState";
 import "./ToDo.scss";
-import { MdDelete } from "react-icons/md";
 
-function ToDo(props) {
-  const [todos, setTodos] = useState([
-    { text: "This Module" },
-    { text: "Is still" },
-    { text: "In Development" },
-    { text: "But Welcome to YLGAW ANYWAYS!" },
-  ]);
-  const [newTodo, setNewTodo] = useState("");
-
-  const addTodo = async (e) => {
-    e.preventDefault();
-    if (!newTodo) {
-      return;
-    }
-    setTodos((todos) => todos.concat({ text: newTodo }));
-    setNewTodo("");
-  };
-
-  const removeTodo = (index) => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
-  };
+const ToDo = (props) => {
+  const { todos, addTodo, deleteTodo } = useTodoState([]);
 
   return (
     <div className={props.isSidebarOpen ? "main" : "mainSideClosed"}>
-      <div className="todoList">
-        {todos.map((todo, index) => (
-          <div className="todo" key={index} index={index}>
-            {todo.text}
-            <MdDelete onClick={() => removeTodo(index)} />
-          </div>
-        ))}
-        <form onSubmit={addTodo}>
-          <input
-            type="text"
-            name="newTodo"
-            value={newTodo}
-            onChange={(e) => setNewTodo(e.target.value)}
-          />
-          <button type="submit">SUBMIT</button>
-        </form>
+      <div className="todo">
+        <TodoForm
+          saveTodo={(todoText) => {
+            const trimmedText = todoText.trim();
+
+            if (trimmedText.length > 0) {
+              addTodo(trimmedText);
+            }
+          }}
+        />
+
+        <TodoList todos={todos} deleteTodo={deleteTodo} />
       </div>
     </div>
   );
-}
-
+};
 export default ToDo;

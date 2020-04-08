@@ -1,34 +1,9 @@
-.todoList {
-  width: 500px;
-  background-color: blue;
-  margin: 50px auto;
+.todo {
   display: flex;
   flex-direction: column;
-
-  .todo {
-    width: 100%;
-    padding: 10px;
-    background-color: blanchedalmond;
-    overflow: hidden;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    position: relative;
-    &:hover {
-      background-color: rgb(102, 71, 71);
-    }
-    svg {
-      height: 100%;
-      width: 30px;
-      position: absolute;
-      right: 0;
-    }
-  }
+  align-content: center;
+  justify-content: center;
   form {
-    display: flex;
-  }
-  input {
-    width: 100%;
-    box-sizing: border-box;
+    margin: auto;
   }
 }
