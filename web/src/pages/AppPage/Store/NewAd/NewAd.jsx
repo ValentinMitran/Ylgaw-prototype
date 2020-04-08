@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import "./NewAd.scss";
 import { toast } from "react-toastify";
+import { TextField, Button } from "@material-ui/core";
 
 function NewAd({ history }) {
   const [adTitle, setAdTitle] = useState("");
@@ -35,38 +36,44 @@ function NewAd({ history }) {
   useEffect(() => {}, []);
 
   return (
-    <div>
+    <div className="newAd">
       <form className="adForm" onSubmit={submitForm}>
-        Title:
-        <input
-          required
-          type="text"
-          name="adTitle"
+        <TextField
+          id="standard-basic"
+          label="Ad Title"
+          placeholder="Ad Title"
+          variant="outlined"
           value={adTitle}
-          id="adTitle"
           onChange={(e) => setAdTitle(e.target.value)}
+          style={{ marginBottom: "20px" }}
         />
-        Description:
-        <input
-          required
-          type="text"
-          name="adDescription"
+
+        <TextField
+          id="outlined-textarea"
+          label="Ad Description"
+          placeholder="Ad Description"
+          multiline
+          variant="outlined"
           value={adDescription}
-          id="adDescription"
           onChange={(e) => setAdDescription(e.target.value)}
+          style={{ marginBottom: "20px" }}
         />
-        Price:
-        <input
-          required
-          min="1"
+        <TextField
+          id="outlined-number"
+          label="Number"
           type="number"
-          name="price"
+          inputProps={{ min: "1", max: "999" }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
           value={price}
-          pattern="[0-9]"
-          id="price"
           onChange={(e) => setPrice(e.target.value)}
+          style={{ marginBottom: "20px" }}
         />
-        <button type="submit">Post Ad</button>
+        <Button variant="contained" color="primary" type="submit">
+          Primary
+        </Button>
       </form>
     </div>
   );

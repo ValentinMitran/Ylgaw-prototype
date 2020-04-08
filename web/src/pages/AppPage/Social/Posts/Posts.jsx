@@ -3,9 +3,11 @@ import { withRouter } from "react-router-dom";
 import "./Posts.scss";
 import Follow from "./Follow";
 import Unfollow from "./Unfollow";
+import { CircularProgress } from "@material-ui/core";
 
 function Posts({ history }) {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   async function getPosts() {
     let response = await fetch("/api/social/posts", {
@@ -17,12 +19,15 @@ function Posts({ history }) {
     });
     response = await response.json();
     setPosts(response);
+    setIsLoading(false);
   }
   useEffect(() => {
     getPosts();
   }, []);
+
   return (
     <>
+      {isLoading ? <CircularProgress /> : null}
       {posts.map((post, index) => (
         <div className="post" key={index}>
           <div className="pheader">

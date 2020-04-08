@@ -5,8 +5,31 @@ import NewAd from "./NewAd/NewAd";
 import MyAds from "./MyAds/MyAds";
 import Ad from "./Ad/Ad";
 import { MdAdd, MdList, MdKeyboardReturn } from "react-icons/md";
+import { makeStyles } from "@material-ui/core/styles";
+import { Card, CardActions, CardContent, Typography } from "@material-ui/core";
+import ModalAd from "./ModalAd";
+
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+    margin: 10,
+  },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
 function Store() {
+  const classes = useStyles();
+
   let { path, url } = useRouteMatch();
   const [ads, setAds] = useState([]);
   const [search, setSearch] = useState("");
@@ -53,21 +76,34 @@ function Store() {
             </div>
             <div className="listings">
               {ads.map((ad) => (
-                <div key={ad._id} className="listingCard">
-                  <div className="listingText">
-                    <span className="title">
+                <Card key={ad._id} className={classes.root}>
+                  <CardContent>
+                    <Typography
+                      className={classes.title}
+                      color="textSecondary"
+                      gutterBottom
+                    >
                       {ad.title.split(" ").slice(0, 7).join(" ")}
-                    </span>
-                    <span className="price">Price: {ad.price}&euro;</span>
-                    <span className="seller">
-                      Sold by:{" "}
-                      <Link to={`/u/${ad.username}`}>{ad.username}</Link>
-                    </span>
-                    <Link id="viewAdButton" to={`${url}/ad/${ad._id}`}>
-                      View
-                    </Link>
-                  </div>
-                </div>
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                      {ad.description.split(" ").slice(0, 15).join(" ")}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                      {ad.price}&euro;
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                      Sold by: {ad.username}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <ModalAd
+                      title={ad.title}
+                      description={ad.description}
+                      price={ad.price}
+                      username={ad.username}
+                    />
+                  </CardActions>
+                </Card>
               ))}
             </div>
           </Route>

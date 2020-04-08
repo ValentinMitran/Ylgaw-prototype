@@ -1,16 +1,11 @@
-.adForm {
-  background-color: rgb(170, 170, 170);
-  width: 100%;
-  text-align: center;
-  margin: 50px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-@media (max-width: 768px) {
-  .adForm {
-    margin: 10px 0;
-    width: 100%;
+.newAd {
+  max-width: 600px;
+  margin: 20px auto;
+  form {
+    display: flex;
+    flex-direction: column;
   }
+}
+.teste {
+  margin-bottom: 100px;
 }
